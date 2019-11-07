@@ -22,7 +22,7 @@ public:// Shift operator
 public:// Ro operator
 	Abstract_Base* ROL();
 	Abstract_Base* ROR();
-public:// Convert method
+public:// Convert method, if a num of base A convert to base A just copy it and return
 	virtual Abstract_Base* toDec() = 0;
 	virtual Abstract_Base* toBin() = 0;
 	virtual Abstract_Base* toHex() = 0;
