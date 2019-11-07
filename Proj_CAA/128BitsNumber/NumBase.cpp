@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "NumBase.h"
+#include "Abstract_Base.h"
 
 
-NumBase::NumBase(){
+Abstract_Base::Abstract_Base(){
 	// Allocate two numbers of 64 bits to get 128 bits
 	this->Bits = new int64_t[2];
 	// Set 0 for 128 bit
@@ -10,7 +10,7 @@ NumBase::NumBase(){
 	this->Bits[1] = 0;
 }
 
-NumBase::NumBase(const NumBase& num) {
+Abstract_Base::Abstract_Base(const Abstract_Base& num) {
 	// Dellocate avaiable memory to avoid leaked
 	if (this->Bits != nullptr)
 		delete[] this->Bits;
@@ -23,6 +23,6 @@ NumBase::NumBase(const NumBase& num) {
 
 }
 
-NumBase::~NumBase(){
+Abstract_Base::~Abstract_Base(){
 	delete[] this->Bits;
 }
