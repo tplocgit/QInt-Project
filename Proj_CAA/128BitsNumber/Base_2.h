@@ -1,11 +1,9 @@
 #pragma once
 #include"pch.h"
-typedef unsigned char uint8_t;// unsigned int 8 bit 0 -> 255
-
 
 class Base_2 {
 private:
-	int64_t* Bits;
+	__int64* Bits;
 public:// Calculating operator
 	Base_2 operator+(const Base_2& num);// Normal
 	Base_2 operator-(const Base_2& num);// Normal
@@ -35,15 +33,13 @@ public:// Some support method
 	void setBit(uint8_t index, bool value);// Set value for bit of index
 	Base_2 ComplementOfOne();
 	Base_2 Negative();// Return a two's complement number of its
-	string BitsToString();// Return Bist as string
-	virtual string toString();
 	bool bitAt(uint8_t index);// Get bit at index
 	bool lastBit();// Return last bit
-	uint8_t FourBitsToHex(string bits);// Converts 4 bits to Hex value
-	uint8_t CharToInt(unsigned char input);// Convert one char to int value 8 bit
+	static uint8_t FourBitsToHex(string bits);// Converts 4 bits to Hex value
+	static uint8_t CharToInt(unsigned char input);// Convert one char to int value 8 bit
 public:// Read file
-	string DecToBin(string dec);
-	string HexToBin(string dec);// Ez
+	static string DecToBin(string dec);
+	static string HexToBin(string dec);// Ez
 public:
 	Base_2(uint16_t inputType, string value);// For file reading
 	Base_2(string bits);// Ez
