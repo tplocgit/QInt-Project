@@ -151,21 +151,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Base_10.h" />
-    <ClInclude Include="Base_16.h" />
     <ClInclude Include="Base_2.h" />
     <ClInclude Include="FileCooker.h" />
-    <ClInclude Include="Abstract_Base.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="128BitsNumber.cpp" />
-    <ClCompile Include="Base_10.cpp" />
-    <ClCompile Include="Base_16.cpp" />
     <ClCompile Include="Base_2.cpp" />
     <ClCompile Include="FileCooker.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="NumBase.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

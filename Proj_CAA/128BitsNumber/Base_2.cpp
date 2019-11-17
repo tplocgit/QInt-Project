@@ -38,16 +38,16 @@ Base_2::~Base_2() {
 	delete[] this->Bits;
 }
 
-uint8_t powOfTwo(uint8_t n) {
+uint8_t TwoPowerBy(uint8_t n) {
 	if (n == 0)
 		return 1;
 	else if (n == 1)
 		return 2;
 	else {
 		if (n % 2 == 0)
-			return powOfTwo(n / 2)*powOfTwo(n / 2);
+			return TwoPowerBy(n / 2)*TwoPowerBy(n / 2);
 		else
-			return 2 * powOfTwo(n / 2)*powOfTwo(n / 2);
+			return 2 * TwoPowerBy(n / 2)*TwoPowerBy(n / 2);
 	}
 }
 // Support method-------------------------------------------------------------------------------------------------------------
@@ -79,18 +79,18 @@ bool Base_2::bitAt(uint8_t index) {
 
 Base_2 Base_2::ComplementOfOne() {
 	Base_2 tmp = *this;
-	for (int i = 0; i < 128; ++i)
-		tmp.setBit(i, !tmp.bitAt(i));
+	if (!this->bitAt(0)) // Fist bit = 0
+		tmp = ~*this;// tmp = NOT(*this)
 	return tmp;
 }
 
 
-Base_2 Base_2::Negative() {
+Base_2 Base_2::Negative() {// Using Two's Complement
 	Base_2 tmp = *this;
 
-	if (this->bitAt(0) == true) {// Check sign bit, sign bit = 1 -> negative
+	if (this->bitAt(0)) {// Check sign bit, sign bit = 1 -> negative so that we need reverse step
 		--tmp;
-		tmp = tmp.ComplementOfOne();
+		tmp = ~tmp;// tmp = NOT(tmp)
 	}
 	else {
 		tmp = tmp.ComplementOfOne();
@@ -126,6 +126,13 @@ string Base_2::toString() {
 	return this->BitsToString();
 }
 
+uint8_t Base_2::CharToInt(unsigned char input) {
+	if (input - '0' < 0 || input - '0' > 9)
+		throw "Error: Invalid Char!";
+	else
+		return input - '0';// ASCII, 0 start at 48 so we need to subtract value by 48 to get int value
+}
+
 uint8_t Base_2::FourBitsToHex(string bits) {
 	if (bits.length() != 4)
 		throw "Error: Invalid length!";
@@ -133,8 +140,8 @@ uint8_t Base_2::FourBitsToHex(string bits) {
 		uint8_t value = 0;
 		for (size_t i = 0; i < bits.length(); ++i) {
 			if (bits[i] != '0' && bits[i] != '1')
-				throw "Error: Invalid string";
-			value += (bits[i] - '0') * powOfTwo(bits.length() - i - 1);// ASCII 0 not start at 48 so that we just - 48 then get int value
+				throw "Error: Invalid data";
+			value += (this->CharToInt(bits[i])) * TwoPowerBy(bits.length() - i - 1);
 			if (0 <= value && value <= 9)
 				return value;
 			else {
@@ -174,4 +181,11 @@ Base_2 Base_2::operator++(int x) {
 }
 Base_2 Base_2::operator--(int x) {
 
+}
+//Bit Wise operator-----------------------------------------------------------------------------------------------------------
+Base_2 Base_2::operator~() {
+	Base_2 tmp = *this;
+	for (int i = 0; i < 128; ++i)
+		tmp.setBit(i, !tmp.bitAt(i));
+	return tmp;
 }
