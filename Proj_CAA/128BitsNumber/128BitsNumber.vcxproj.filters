@@ -21,16 +21,7 @@
     <ClInclude Include="Base_2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Base_10.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Base_16.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FileCooker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Abstract_Base.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,16 +35,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NumBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FileCooker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Base_16.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Base_10.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Base_2.cpp">
