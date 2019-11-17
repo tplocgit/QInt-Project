@@ -53,19 +53,11 @@ uint8_t TwoPowerBy(uint8_t n) {
 // Support method-------------------------------------------------------------------------------------------------------------
 void Base_2::setBit(uint8_t index, bool bitVal) {// Set value for bit of index 
 	if (0 <= int(index) && int(index) <= 63)// The first element - Bits[0] contains bits from 0 -> 63
-		this->Bits[0] = this->Bits[0] | (bitVal << index);
+		this->Bits[0] = this->Bits[0] | (bitVal << (63 - index));
 	else if (64 <= int(index) && int(index) <= 127)// The last element - Bist[1] contains bits from 64 -> 127 
-		this->Bits[1] = this->Bits[1] | (bitVal << (index - 64));
+		this->Bits[1] = this->Bits[1] | (bitVal << (63 - (index - 64)));
 	else
 		throw "Error: Invalid index";
-}
-
-string Base_2::BitsToString() {// Return bits as string
-	stringstream writer;
-	for (int i = 0; i < 2; ++i)
-		for (int j = 0; j < 64; ++j)
-			writer << ((this->Bits[i] >> j) & int64_t(1));
-	return writer.str();
 }
 
 bool Base_2::bitAt(uint8_t index) {
@@ -113,7 +105,7 @@ string Base_2::toBin() {
 }
 
 string Base_2::toHex() {
-	string bits = this->BitsToString();
+	string bits = this->toBin();
 	stringstream writer;
 	for (int i = 0; i < 128; i += 4) {
 		string FourBits = bits.substr(i - 1, 4);// get sub string at i - 1 with length = 4
@@ -122,9 +114,6 @@ string Base_2::toHex() {
 	return writer.str();
 }
 
-string Base_2::toString() {
-	return this->BitsToString();
-}
 
 uint8_t Base_2::CharToInt(unsigned char input) {
 	if (input - '0' < 0 || input - '0' > 9)
@@ -141,7 +130,7 @@ uint8_t Base_2::FourBitsToHex(string bits) {
 		for (size_t i = 0; i < bits.length(); ++i) {
 			if (bits[i] != '0' && bits[i] != '1')
 				throw "Error: Invalid data";
-			value += (this->CharToInt(bits[i])) * TwoPowerBy(bits.length() - i - 1);
+			value += (Base_2::CharToInt(bits[i])) * TwoPowerBy(bits.length() - i - 1);
 			if (0 <= value && value <= 9)
 				return value;
 			else {
