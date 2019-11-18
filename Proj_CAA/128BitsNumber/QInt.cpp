@@ -46,6 +46,18 @@ QInt::~QInt() {
 
 QInt::QInt(uint8_t inputType, string value) {
 
+	if (inputType == 2) { // Binary	
+		QInt(value);
+	}
+	else if (inputType == 10) { // Dec	
+		string bits = DecToBin(value);
+		QInt::QInt(bits);
+	}
+	else if (inputType == 16) {//Hex
+		string bits = HexToBin(value);
+		QInt::QInt(bits);
+	}
+	else throw "Error: Invalid input Type!";
 }
 
 // Support method-------------------------------------------------------------------------------------------------------------
@@ -158,10 +170,10 @@ string QInt::DecToBin(string dec) {
 }
 
 string QInt::HexToBin(string hex) {
-	string res;
+	stringstream writer;
 	for (auto it = hex.begin(); it != hex.end(); ++it)
-		res += QInt::HexToFourBits(*it);
-	return res;
+		writer << QInt::HexToFourBits(*it);
+	return writer.str();
 }
 
 string QInt::Dec() {
@@ -239,6 +251,28 @@ string QInt::HexToFourBits(unsigned char hex) {
 	case 'F': return "1111";
 	default: throw "Error: Invalid Input!";
 	}
+}
+
+string QInt::AddTwoDec(string dec1, string dec2) {
+	size_t len1 = dec1.length();
+	size_t len2 = dec2.length();
+	string res;
+	bool save = false;
+	while (len1 >= 0 || len2 >= 0 || save) {
+		uint8_t dig = 0;
+		if (len1 >= 0)
+			dig += dec1[len1--];
+		if (len2 >= 0)
+			dig += dec2[len2--];
+		dig += save;
+		save = false;
+		if (dig >= 10) {
+			dig %= 10;
+			save = true;
+		}
+		res.push_back(IntToChar(dig));
+	}
+	return res;
 }
 //Operators-------------------------------------------------------------------------------------------------------------------
 bool QInt::lastBit() {

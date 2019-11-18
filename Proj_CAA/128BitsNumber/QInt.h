@@ -41,6 +41,7 @@ public:// Some support method
 	static string DecDiv(string val, uint8_t divided);
 	static string HexToFourBits(unsigned char hex);
 	static uint8_t TwoPower(uint8_t n);// 2^n up to 2^8
+	static string AddTwoDec(string dec1, string dec2);
 public:// Read file
 	static string DecToBin(string dec);// Hard
 	static string HexToBin(string hex);// Ez
