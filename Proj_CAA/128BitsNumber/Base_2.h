@@ -32,8 +32,8 @@ public:// Convert method
 public:// Some support method
 	void setBit(uint8_t index, bool value);// Set value for bit of index
 	Base_2 ComplementOfOne();
-	Base_2 Negative();// Return a two's complement number of its
-	bool bitAt(uint8_t index);// Get bit at index
+	Base_2 Negative()const;// Return a two's complement number of its
+	bool bitAt(uint8_t index)const;// Get bit at index
 	bool lastBit();// Return last bit
 	static uint8_t FourBitsToHex(string bits);// Converts 4 bits to Hex value
 	static uint8_t CharToInt(unsigned char input);// Convert one char to int value 8 bit

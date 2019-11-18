@@ -152,12 +152,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Base_2.h" />
+    <ClInclude Include="Calculator.h" />
     <ClInclude Include="FileCooker.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Tokenizer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="128BitsNumber.cpp" />
     <ClCompile Include="Base_2.cpp" />
+    <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="FileCooker.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">
