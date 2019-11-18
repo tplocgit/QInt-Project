@@ -164,6 +164,7 @@ string QInt::DecToBin(string dec) {
 	while (dec != "0") {
 		bool bit = QInt::CharToInt(*it) % 2;
 		res.push_back(IntToChar(bit));
+		dec = QInt::DecDiv(dec, 2);
 	}
 	reverse(res.begin(), res.end());
 	return res;
@@ -278,6 +279,7 @@ string QInt::AddTwoDec(string dec1, string dec2) {
 bool QInt::lastBit() {
 	return this->Bits[1] & int64_t(1);
 }
+
 QInt& QInt::operator++() {
 	bool save = true;// Ex: 1 + 1 = 10, save = 1, 1 + 0 = 1 save 0
 
@@ -294,6 +296,7 @@ QInt& QInt::operator++() {
 
 	return *this;
 }
+
 QInt& QInt::operator--() {
 	bool save = true;// Ex: 0 -  1 = 1, save = 1, 1 - 1 = 0 save 0
 
@@ -316,6 +319,7 @@ QInt QInt::operator++(int x) {
 	++*this;
 	return tmp;
 }
+
 QInt QInt::operator--(int x) {
 	QInt tmp = *this;
 	--*this;
@@ -371,10 +375,10 @@ QInt QInt::operator-(const QInt& num) {// Normal
 	return *this + (num.Negative());
 }
 
-
 QInt QInt::ROL() {// Ez
 
 }
+
 QInt QInt::ROR() {// Ez
 
 }
@@ -382,10 +386,11 @@ QInt QInt::ROR() {// Ez
 QInt QInt::operator&(const QInt& num)const {
 
 }
+
 QInt QInt::operator|(const QInt& num)const {
 
 }
+
 QInt QInt::operator^(const QInt& num)const {
 
 }
-
