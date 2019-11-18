@@ -44,16 +44,16 @@ QInt::~QInt() {
 	delete[] this->Bits;
 }
 
-QInt::QInt(uint8_t inputType, string value) {
+QInt::QInt(BASE inputType, string value) {
 
-	if (inputType == 2) { // Binary	
+	if (inputType == BINARY) { // Binary	
 		QInt(value);
 	}
-	else if (inputType == 10) { // Dec	
+	else if (inputType == DECIMAL) { // Dec	
 		string bits = DecToBin(value);
 		QInt::QInt(bits);
 	}
-	else if (inputType == 16) {//Hex
+	else if (inputType == HEXADECIMAL) {//Hex
 		string bits = HexToBin(value);
 		QInt::QInt(bits);
 	}
@@ -336,7 +336,7 @@ QInt QInt::operator~() {
 	return tmp;
 }
 
-//-----------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------
 QInt QInt::operator+(const QInt& num) {// Normal
 	QInt ans;
 	bool save = 0;// Ex: 1 + 1 = 10, save = 1, 1 + 0 = 1 save 0
@@ -377,6 +377,13 @@ QInt QInt::operator-(const QInt& num) {// Normal
 	return *this + (num.Negative());
 }
 
+
+QInt QInt::operator*(const QInt& num) {// Hard
+
+}
+
+//-----------------------------------------------------------------
+
 QInt QInt::ROL() {// Ez
 
 }
@@ -385,6 +392,7 @@ QInt QInt::ROR() {// Ez
 
 }
 
+//-----------------------------------------------------------------
 QInt QInt::operator&(const QInt& num)const {
 
 }
@@ -394,5 +402,11 @@ QInt QInt::operator|(const QInt& num)const {
 }
 
 QInt QInt::operator^(const QInt& num)const {
+
+//-----------------------------------------------------------------
+QInt QInt::operator<<(int bits) {// Normal
+
+}
+QInt QInt::operator>>(int bits) {// Ez
 
 }

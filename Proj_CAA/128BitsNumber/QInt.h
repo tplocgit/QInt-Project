@@ -1,5 +1,6 @@
 #pragma once
 #include"pch.h"
+#include"Calculator.h"
 //QInt
 class QInt {
 private:
@@ -22,6 +23,8 @@ public:// Bitwise operator, All Ez
 public:// Shift operator
 	QInt operator<<(int bits);// Normal
 	QInt operator>>(int bits);// Ez
+private:
+	
 public:// Ro operator
 	QInt ROL();// Ez
 	QInt ROR();// Ez
@@ -46,7 +49,7 @@ public:// Read file
 	static string DecToBin(string dec);// Hard
 	static string HexToBin(string hex);// Ez
 public:
-	QInt(uint8_t inputType, string value);// For file reading
+	QInt(BASE inputType, string value);// For file reading
 	QInt(string bits);
 	// Big three
 	QInt operator=(const QInt& obj);
