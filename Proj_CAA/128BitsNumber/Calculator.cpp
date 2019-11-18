@@ -1,82 +1,31 @@
+#include "pch.h"
 #include "Calculator.h"
 
-
-
-Problem::Problem() {
-		base = BASE::NONE;
+Calculator::Calculator() : Task() {
+	this->calOperator = NONE2;
 }
-
-void Problem::setBase(string input) {
-	if (input == "16")
-		base = HEXADECIMAL;
-	else if (input == "10")
-		base = DECIMAL;
-	else if (input == "2")
-		base = BINARY;
-	else
-		throw "Invalid input";
+Calculator::Calculator(string num1, string num2) : Task(num1, num2) {
+	this->calOperator = NONE2;
 }
-
-//---------------------------------------------------------------------------
-Calculate::Calculate() : Problem() {
-		num1 = num2 = "";
-		calOperator = CASE2::NONE;
-}
-void Calculate::setNum(string input) {}
-void Calculate::setNum1(string input) {
-	num1 = input;
-}
-void Calculate::setNum2(string input) {
-	num2 = input;
-}
-void Calculate::setOperator(string input) {
+void Calculator::setOperator(string input) {
 	if (input == "+")
-		calOperator = ADD;
+		this->calOperator = ADD;
 	else if (input == "-")
-		calOperator = MINUS;
+		this->calOperator = MINUS;
 	else if (input == "*")
-		calOperator = MULTIPLY;
+		this->calOperator = MULTIPLY;
 	else if (input == "/")
-		calOperator = DIVIDE;
+		this->calOperator = DIVIDE;
 	else if (input == "&")
-		calOperator = AND;
+		this->calOperator = AND;
 	else if (input == "|")
-		calOperator = OR;
+		this->calOperator = OR;
 	else if (input == "^")
-		calOperator = XOR;
+		this->calOperator = XOR;
 	else if (input == ">>")
-		calOperator = MOVE_RIGHT;
+		this->calOperator = MOVE_RIGHT;
 	else if (input == "<<")
-		calOperator = MOVE_LEFT;
+		this->calOperator = MOVE_LEFT;
 	else
 		throw "Invalid input";
 }
-
-//---------------------------------------------------------------------------
-Convert::Convert() : Problem() {
-	num = "";
-	convertOperator = CASE1::NONE;
-}
-void Convert::setNum1(string input) {}
-void Convert::setNum2(string input) {}
-void Convert::setNum(string input) {
-	num = input;
-}
-void Convert::setOperator(string input) {
-	if (input == "2")
-		convertOperator = CON_BIN;
-	else if (input == "10")
-		convertOperator = CON_DEC;
-	else if (input == "16")
-		convertOperator = CON_HEX;
-	else if (input == "~")
-		convertOperator = NOT;
-	else if (input == "ror")
-		convertOperator = ROR;
-	else if (input == "rol")
-		convertOperator = ROL;
-	else
-		throw "Invalid input";
-}
-
-

@@ -1,6 +1,6 @@
 #pragma once
-#include"pch.h"
-#include"Calculator.h"
+#include "Calculator.h"
+#include "pch.h"
 //QInt
 class QInt {
 private:
@@ -25,7 +25,7 @@ public:// Shift operator
 	QInt operator>>(int bits);// Ez
 private:
 	
-public:// Ro operator
+public:// Rolling operator
 	QInt ROL();// Ez
 	QInt ROR();// Ez
 public:// Convert method
