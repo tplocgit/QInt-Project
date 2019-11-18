@@ -1,38 +1,38 @@
 #pragma once
 #include"pch.h"
 //QInt
-class Base_2 {
+class QInt {
 private:
 	int64_t* Bits;
 public:// Calculating operator
-	Base_2 operator+(const Base_2& num);// Normal
-	Base_2 operator-(const Base_2& num);// Normal
-	Base_2 operator*(const Base_2& num);// Hard
-	Base_2 operator/(const Base_2& num);// Extra Supper Hard
+	QInt operator+(const QInt& num);// Normal
+	QInt operator-(const QInt& num);// Normal
+	QInt operator*(const QInt& num);// Hard
+	QInt operator/(const QInt& num);// Extra Supper Hard
 public:// Others operator
-	Base_2& operator++();
-	Base_2& operator--();
-	Base_2 operator++(int x);
-	Base_2 operator--(int x);
+	QInt& operator++();
+	QInt& operator--();
+	QInt operator++(int x);
+	QInt operator--(int x);
 public:// Bitwise operator, All Ez
-	Base_2 operator&(const Base_2& num)const;
-	Base_2 operator|(const Base_2& num)const;
-	Base_2 operator^(const Base_2& num)const;
-	Base_2 operator~();
+	QInt operator&(const QInt& num)const;
+	QInt operator|(const QInt& num)const;
+	QInt operator^(const QInt& num)const;
+	QInt operator~();
 public:// Shift operator
-	Base_2 operator<<(int bits);// Normal
-	Base_2 operator>>(int bits);// Ez
+	QInt operator<<(int bits);// Normal
+	QInt operator>>(int bits);// Ez
 public:// Ro operator
-	Base_2 ROL();// Ez
-	Base_2 ROR();// Ez
+	QInt ROL();// Ez
+	QInt ROR();// Ez
 public:// Convert method
 	string Dec();// Extra Supper Hard
 	string Bin();// DKM EZ VKL
 	string Hex();// Ez
 public:// Some support method
 	void setBit(uint8_t index, bool value);// Set value for bit of index
-	Base_2 ComplementOfOne();
-	Base_2 Negative()const;// Return a two's complement number of its
+	QInt ComplementOfOne();
+	QInt Negative()const;// Return a two's complement number of its
 	bool bitAt(uint8_t index)const;// Get bit at index
 	bool lastBit();// Return last bit
 	static char FourBitsToHex(string bits);// Converts 4 bits to Hex value
@@ -45,10 +45,10 @@ public:// Read file
 	static string DecToBin(string dec);// Hard
 	static string HexToBin(string hex);// Ez
 public:
-	Base_2(uint8_t inputType, string value);// For file reading
-	Base_2(string bits);
+	QInt(uint8_t inputType, string value);// For file reading
+	QInt(string bits);
 	// Big three
-	Base_2 operator=(const Base_2& obj);
-	Base_2();
-	virtual ~Base_2();
+	QInt operator=(const QInt& obj);
+	QInt();
+	virtual ~QInt();
 };
