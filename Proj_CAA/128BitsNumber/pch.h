@@ -8,14 +8,16 @@
 
 #ifndef PCH_H
 #define PCH_H
-
 // TODO: add headers that you want to pre-compile here
 #include<fstream>
 #include<string>
 #include<sstream>
 #include<iostream>
+
 #include<typeinfo>
 #include<algorithm>
+#include<vector>
+
 using namespace std;
 
 #endif //PCH_H

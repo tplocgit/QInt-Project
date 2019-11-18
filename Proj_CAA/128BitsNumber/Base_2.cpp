@@ -83,7 +83,7 @@ void Base_2::setBit(uint8_t index, bool bitVal) {// Set value for bit of index
 		throw "Error: Invalid index";
 }
 
-bool Base_2::bitAt(uint8_t index) {
+bool Base_2::bitAt(uint8_t index) const{
 	if (0 <= int(index) && int(index) <= 63)// The first element contains bits from 1 -> 63
 		return (this->Bits[0] << (63 - index)) & int64_t(1);
 	else if (64 <= int(index) && int(index) <= 127)// The last element contains bits from 64 -> 127 
@@ -100,7 +100,7 @@ Base_2 Base_2::ComplementOfOne() {
 }
 
 
-Base_2 Base_2::Negative() {// Using Two's Complement
+Base_2 Base_2::Negative()const {// Using Two's Complement
 	Base_2 tmp = *this;
 
 	if (this->bitAt(0)) {// Check sign bit, sign bit = 1 -> negative so that we need reverse step
@@ -185,7 +185,7 @@ string Base_2::Hex() {
 	}
 	return writer.str();
 }
-
+//--------------------------------------------------------------------
 
 uint8_t Base_2::CharToInt(unsigned char input) {
 	if (input - '0' < 0 || input - '0' > 9)
@@ -245,7 +245,7 @@ bool Base_2::lastBit() {
 	return this->Bits[1] & int64_t(1);
 }
 Base_2& Base_2::operator++() {
-	bool save = true;// Ex: 1 + 1 = 10, save = 1, 1 + 0 = 0 save 0
+	bool save = true;// Ex: 1 + 1 = 10, save = 1, 1 + 0 = 1 save 0
 
 	for (int i = 127; i >= 0 && save; --i) {
 		if (this->bitAt(i)) {// bit = 1
@@ -287,10 +287,70 @@ Base_2 Base_2::operator--(int x) {
 	--*this;
 	return tmp;
 }
+
 //Bit Wise operator-----------------------------------------------------------------------------------------------------------
 Base_2 Base_2::operator~() {
 	Base_2 tmp = *this;
 	for (int i = 0; i < 128; ++i)
 		tmp.setBit(i, !tmp.bitAt(i));
 	return tmp;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+Base_2 Base_2::operator+(const Base_2& num) {// Normal
+	Base_2 ans;
+	bool save = 0;// Ex: 1 + 1 = 10, save = 1, 1 + 0 = 1 save 0
+
+	for (int i = 127; i >= 0; --i) {
+		if (ans.bitAt(i) == 1 && num.bitAt(i) == 1) {// bit = 1
+			if (save)
+				ans.setBit(i, 1);
+			else
+				ans.setBit(i, 0);
+			save = 1;
+		}
+		else if (ans.bitAt(i) == 0 && num.bitAt(i) == 0) {
+			if (save)
+				ans.setBit(i, 1);
+			else
+				ans.setBit(i, 0);
+			save = 0;
+		}
+		else {// 1 - 0 or 0 - 1
+			if (save) {
+				ans.setBit(i, 0);
+			}
+			else {
+				ans.setBit(i, 1);
+			}
+			//no need to modify 'save' in this case 
+		}
+	}
+	//if (save == 1)
+		//throw "Error: overflow";
+
+
+	return ans;
+}
+
+Base_2 Base_2::operator-(const Base_2& num) {// Normal
+	return *this + (num.Negative());
+}
+
+
+Base_2 Base_2::ROL() {// Ez
+
+}
+Base_2 Base_2::ROR() {// Ez
+
+}
+
+Base_2 Base_2::operator&(const Base_2& num)const {
+
+}
+Base_2 Base_2::operator|(const Base_2& num)const {
+
+}
+Base_2 Base_2::operator^(const Base_2& num)const {
+
 }
