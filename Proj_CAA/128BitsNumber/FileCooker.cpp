@@ -1,55 +1,49 @@
 #include "FileCooker.h"
+#include "Calculator.h"
+#include "Converter.h"
+#include "pch.h"
 
-
-FileCooker::FileCooker()
-{
-}
-
-
-FileCooker::~FileCooker()
-{
-}
-
-vector <Problem*> FileCooker::readFile(string fileName) {
+vector <Task*> readFile(string fileName) {
 	ifstream reader;
 	reader.open(fileName, ios::in);
 
 	if (!reader.is_open())
-		return;
+		return {};
 
-	vector <Problem*> list;
+	vector <Task*> list;
 	string s;
 	while (!reader.eof()) {
 		getline(reader, s);
 		if (s == "")
 			break;
-		Problem *p = readLine(s);
+		Task*p = readLine(s);
 		list.push_back(p);
-		//delete p;
 	}
 	reader.close();
+
+	return list;
 }
 
-Problem *FileCooker::readLine(string lineInfo) {
+Task*readLine(string lineInfo) {
 	vector<string> tokens = Tokenizer::Parse(lineInfo, " ");
 	
-	Problem* res = nullptr;
+	Task* res = nullptr;
 	if (tokens.size() == 3) {
-		res = new Convert;
+		res = new Converter;
 		res->setBase(tokens[0]);
 		res->setOperator(tokens[1]);
-		res->setNum(tokens[2]);
+		res->setNum1(tokens[2]);
 	}
 	else if (tokens.size() == 4) {
-		res = new Calculate;
+		res = new Calculator;
 		res->setBase(tokens[0]);
 		res->setNum1(tokens[1]);
 		res->setOperator(tokens[2]);
 		res->setNum2(tokens[3]);
 	}
-	else {
+	else 
 		throw "Error: Invalid input";
-	}
+	
 
 	return res;
 }

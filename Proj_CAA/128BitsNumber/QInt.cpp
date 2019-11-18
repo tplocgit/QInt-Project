@@ -180,7 +180,7 @@ string QInt::HexToBin(string hex) {
 }
 
 string QInt::Dec() {
-
+	return "";
 }
 
 string QInt::Bin() {
@@ -377,7 +377,7 @@ QInt QInt::operator-(const QInt& num) {// Normal
 	return *this + (num.Negative());
 }
 
-
+/*
 QInt QInt::operator*(const QInt& num) {// Hard
 
 }
@@ -403,6 +403,7 @@ QInt QInt::operator|(const QInt& num)const {
 
 QInt QInt::operator^(const QInt& num)const {
 
+}
 //-----------------------------------------------------------------
 QInt QInt::operator<<(int bits) {// Normal
 
@@ -410,3 +411,4 @@ QInt QInt::operator<<(int bits) {// Normal
 QInt QInt::operator>>(int bits) {// Ez
 
 }
+*/

@@ -1,17 +1,10 @@
 #pragma once
 #include "pch.h"
-#include "Calculator.h"
+#include "Task.h"
 #include "Tokenizer.h"
 
-class FileCooker{
-public:
-	FileCooker();
-	~FileCooker();
+vector <Task*> readFile(string fileName);
 
-	//-----------------
-	vector <Problem*> readFile(string fileName);
+Task*readLine(string lineInfo);
 
-private:
-	Problem *readLine(string lineInfo);
-};
 
