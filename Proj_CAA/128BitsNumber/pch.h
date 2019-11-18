@@ -14,6 +14,8 @@
 #include<string>
 #include<sstream>
 #include<iostream>
+#include<typeinfo>
+#include<algorithm>
 using namespace std;
 
 #endif //PCH_H
