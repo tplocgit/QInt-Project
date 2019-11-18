@@ -149,9 +149,11 @@ string QInt::DecDiv(string val, uint8_t divided) {
 		}
 	}
 	auto it = res.begin();
-	while (*it == '0')
+	while (*it == '0'&& !res.empty()) {
+		++it;
 		res = res.substr(1, res.length() - 1);
-	if (res == "")
+	}
+	if (res == "" || res == "-")
 		res = "0";
 	return res;
 }
