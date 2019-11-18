@@ -261,9 +261,9 @@ string QInt::AddTwoDec(string dec1, string dec2) {
 	while (len1 >= 0 || len2 >= 0 || save) {
 		uint8_t dig = 0;
 		if (len1 >= 0)
-			dig += dec1[len1--];
+			dig += QInt::CharToInt(dec1[len1--]);
 		if (len2 >= 0)
-			dig += dec2[len2--];
+			dig += QInt::CharToInt(dec2[len2--]);
 		dig += save;
 		save = false;
 		if (dig >= 10) {
