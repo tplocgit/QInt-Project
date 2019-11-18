@@ -11,6 +11,7 @@ public:
 	//-----------------
 	vector <Problem*> readFile(string fileName);
 
+private:
 	Problem *readLine(string lineInfo);
 };
 
