@@ -52,6 +52,7 @@ public:
 	QInt(BASE inputType, string value);// For file reading
 	QInt(string bits);
 	// Big three
+	QInt(const QInt& obj);
 	QInt operator=(const QInt& obj);
 	QInt();
 	virtual ~QInt();

@@ -5,7 +5,7 @@
 QInt::QInt(string bits) {
 	this->Bits = new int64_t[2];
 	for (size_t i = 0; i < bits.length(); ++i)
-		this->setBit(i, CharToInt(bits[i]));
+		this->setBit(uint8_t(i), CharToInt(bits[i]));
 }
 
 QInt QInt::operator=(const QInt& num) {
@@ -18,6 +18,8 @@ QInt QInt::operator=(const QInt& num) {
 	// Copy bits
 	this->Bits[0] = num.Bits[0];
 	this->Bits[1] = num.Bits[1];
+
+	return *this;
 }
 
 QInt::QInt() {
@@ -149,7 +151,7 @@ string QInt::DecDiv(string val, uint8_t divided) {
 		}
 	}
 	auto it = res.begin();
-	while (*it == '0'&& !res.empty()) {
+	while (*it == '0' && !res.empty()) {
 		++it;
 		res = res.substr(1, res.length() - 1);
 	}
@@ -169,6 +171,10 @@ string QInt::DecToBin(string dec) {
 		dec = QInt::DecDiv(dec, 2);
 	}
 	reverse(res.begin(), res.end());
+	if (dec[0] = '-') {
+		QInt tmp(res);
+		res = tmp.Negative().Bin();
+	}
 	return res;
 }
 
@@ -224,12 +230,12 @@ char QInt::FourBitsToHex(string bits) {
 		for (size_t i = 0; i < bits.length(); ++i) {
 			if (bits[i] != '0' && bits[i] != '1')
 				throw "Error: Invalid data";
-			value += (QInt::CharToInt(bits[i])) * QInt::TwoPower(bits.length() - i - 1);
-			if (0 <= value && value <= 9)
-				return value;
-			else {
-				return value + ' ' - 1;// ASCII, character start at 41 with A, ' ' is 32, 10 + 32 - 1 = 41 = A, 11 + 32 - 1 = 42 = B
-			}
+			value += (QInt::CharToInt(bits[i])) * QInt::TwoPower(uint8_t(bits.length() - i - size_t(1)));
+		}
+		if (0 <= value && value <= 9)
+			return value;
+		else {
+			return value + ' ' - 1;// ASCII, character start at 41 with A, ' ' is 32, 10 + 32 - 1 = 41 = A, 11 + 32 - 1 = 42 = B
 		}
 	}
 }
