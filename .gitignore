@@ -3,3 +3,8 @@ x64
 Debug
 Release
 .ipch
+.vcxproj
+.vcxproj.filters
+.vcxproj.user
+x86
+.sln
