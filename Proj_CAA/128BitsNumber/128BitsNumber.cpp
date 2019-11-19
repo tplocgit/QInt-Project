@@ -4,16 +4,15 @@
 #include "QInt.h"
 #include "FileCooker.h"
 #include "Calculator.h"
+#include"TodoList.h"
+
 int main()
 {
 	vector<Task*> list = readFile("sampleInput.txt");
 
-	for (auto i = list.begin(); i != list.end(); ++i) {
-		cout << "Type: " << (*i)->checkData() << endl << endl;
-	}
+	TodoList doList(list);
 
-	for (int i = 0; i < list.size(); ++i)
-		delete list[i];
-	list.clear();
+	doList.checkList();
+
 	system("pause>nul");
 }

@@ -30,7 +30,7 @@ void Calculator::setOperator(string input) {
 		throw "Invalid input";
 }
 
-void Calculator::ExeE() {
+QInt* Calculator::Exe() {
 	QInt* res = new QInt;
 	QInt* num1, * num2;
 	num1 = new QInt(this->Base(), this->Num1());
@@ -49,12 +49,43 @@ void Calculator::ExeE() {
 		*res = *num1 << stoi(this->Num2());
 	}
 	else if (this->calOperator == MOVE_RIGHT) {
-		*res = *num2 >> stoi(this->Num2());
+		*res = *num1 >> stoi(this->Num2());
 	}
 	else
 		throw "Error: Operator is not defined!";
 
 	cout << res->Bin() << endl << res->Hex() << endl << res->Dec() << endl;
 	delete num1;
-	delete res;
+	return res;
+}
+
+void Calculator::ShowAllInfor() {
+	Task::ShowAllInfor();
+	cout << "DO ";
+	if (this->calOperator == AND)
+		cout << "AND";
+	else if (this->calOperator == OR)
+		cout << "OR";
+	else if (this->calOperator == XOR)
+		cout << "XOR";
+	else if (this->calOperator == ADD)
+		cout << "ADD";
+	else if (this->calOperator == MINUS)
+		cout << "MINUS";
+	else if (this->calOperator == MULTIPLY)
+		cout << "MULTIPLY";
+	else if (this->calOperator == DIVIDE)
+		cout << "DIVIDE";
+	else if (this->calOperator == MOVE_LEFT)
+		cout << "SHIFT LEFT";
+	else if (this->calOperator == MOVE_RIGHT)
+		cout << "SHIFT RIGHT";
+	else cout << "NONE";
+	cout << endl;
+}
+
+Task* Calculator::Alloc() {
+	Task* res = new Calculator;
+	*res = *this;
+	return res;
 }

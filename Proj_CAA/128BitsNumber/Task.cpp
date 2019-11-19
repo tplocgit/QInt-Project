@@ -70,7 +70,13 @@ void Task::viewNum2() {
 	else cout << this->num2;
 }
 
-
-
-
-
+void Task::ShowAllInfor() {
+	cout << "Own Base: ";
+	this->viewBase();
+	cout << endl;
+	cout << "Num1: ";
+	this->viewNum1();
+	cout << endl << "Num2: ";
+	this->viewNum2();
+	cout << endl;
+}

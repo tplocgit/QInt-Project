@@ -25,7 +25,7 @@ void Converter::setOperator(string input) {
 		throw "Invalid input";
 }
 
-void Converter::ExeE() {
+QInt* Converter::Exe() {
 	QInt* res = new QInt;
 	QInt* num1 = new QInt(this->Base(), this->Num1());
 
@@ -45,6 +45,32 @@ void Converter::ExeE() {
 	else
 		throw "Error: Deo hieu luon a";
 	delete num1;
-	delete res;
-	cout << res->Bin() << endl << res->Hex() << endl << res->Dec() << endl;
+	return res;
+	//cout << res->Bin() << endl << res->Hex() << endl << res->Dec() << endl;
+}
+
+void Converter::ShowAllInfor() {
+	Task::ShowAllInfor();
+	cout << "DO ";
+	if (this->convertOperator == ROL)
+		cout << "ROL";
+	else if (this->convertOperator == ROR)
+		cout << "ROR";
+	else if (this->convertOperator == CON_BIN)
+		cout << "To Binary";
+	else if (this->convertOperator == CON_DEC)
+		cout << "To Decimal";
+	else if (this->convertOperator == CON_HEX)
+		cout << "To Hexadecimal";
+	else if (this->convertOperator == NOT)
+		cout << "NOT";
+	else cout << "NONE";
+	cout << endl;
+}
+
+
+Task* Converter::Alloc() {
+	Task* res = new Converter;
+	*res = *this;
+	return res;
 }
