@@ -384,18 +384,14 @@ QInt QInt::operator-(const QInt& num) {// Normal
 	return *this + (num.Negative());
 }
 
-
-
-/*QInt QInt::operator*(const QInt& num) {// Hard
-
-}*/
-
 QInt QInt::operator*(const QInt& num) {// Hard
 	QInt ans = *this;
 	int count = 0;
 	for (int i = 127; i > 0; --i) {
-		if (num.bitAt(i) == 1)
-			ans = ans + (num << count);
+		if (num.bitAt(i) == 1) {
+			QInt tmp = (num << count);
+			ans = ans + tmp;
+		}
 		++count;
 	}
 	return ans;
@@ -431,20 +427,30 @@ QInt QInt::ROR() {// Ez
 	return res;
 }
 
-/*
 QInt QInt::operator&(const QInt& num)const {
-
+	QInt ans;
+	for (int i = 127; i >= 0; --i) {
+		ans.setBit(i, (this->bitAt(i) & num.bitAt(i)));
+	}
+	return ans;
 }
 
 QInt QInt::operator|(const QInt& num)const {
-
+	QInt ans;
+	for (int i = 127; i >= 0; --i) {
+		ans.setBit(i, (this->bitAt(i) | num.bitAt(i)));
+	}
+	return ans;
 }
 
 QInt QInt::operator^(const QInt& num)const {
-
+	QInt ans;
+	for (int i = 127; i >= 0; --i) {
+		ans.setBit(i, (this->bitAt(i) ^ num.bitAt(i)));
+	}
+	return ans;
 }
 
-*///-----------------------------------------------------------------
 //-----------------------------------------------------------------
 QInt QInt::operator<<(int bits)const {// Normal
 	QInt ans = *this;
