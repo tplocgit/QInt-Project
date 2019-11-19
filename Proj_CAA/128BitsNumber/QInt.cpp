@@ -385,9 +385,22 @@ QInt QInt::operator-(const QInt& num) {// Normal
 }
 
 
+<<<<<<< HEAD
 /*QInt QInt::operator*(const QInt& num) {// Hard
 
 }*/
+=======
+QInt QInt::operator*(const QInt& num) {// Hard
+	QInt ans = *this;
+	int count = 0;
+	for (int i = 127; i > 0; --i) {
+		if (num.bitAt(i) == 1)
+			ans = ans + (num << count);
+		++count;
+	}
+	return ans;
+}
+>>>>>>> ffe76fda303a7f11ab21b246dc05151b7d1a525f
 
 //-----------------------------------------------------------------
 
@@ -398,9 +411,14 @@ QInt QInt::ROL() {// Ez
 	for (int i = 0; i < 127; ++i) {
 		res.setBit(i, res.bitAt(i + 1));
 	}
+<<<<<<< HEAD
 	res.setBit(127, save);
 
 	return res;
+=======
+	this->setBit(127, save);
+	return *this;
+>>>>>>> ffe76fda303a7f11ab21b246dc05151b7d1a525f
 }
 
 QInt QInt::ROR() {// Ez
@@ -411,12 +429,21 @@ QInt QInt::ROR() {// Ez
 	for (int i = 127; i > 0; --i) {
 		res.setBit(i, res.bitAt(i - 1));
 	}
+<<<<<<< HEAD
 	res.setBit(0, save);
 
 	return res;
 }
 
 /*/-----------------------------------------------------------------
+=======
+	this->setBit(0, save);
+	return *this;
+}
+
+//-----------------------------------------------------------------
+/*
+>>>>>>> ffe76fda303a7f11ab21b246dc05151b7d1a525f
 QInt QInt::operator&(const QInt& num)const {
 
 }
@@ -428,8 +455,14 @@ QInt QInt::operator|(const QInt& num)const {
 QInt QInt::operator^(const QInt& num)const {
 
 }
+<<<<<<< HEAD
 *///-----------------------------------------------------------------
 QInt QInt::operator<<(int bits) {// Normal
+=======
+*/
+//-----------------------------------------------------------------
+QInt QInt::operator<<(int bits)const {// Normal
+>>>>>>> ffe76fda303a7f11ab21b246dc05151b7d1a525f
 	QInt ans = *this;
 	while (bits > 0) {
 		ans.moveLeft();
@@ -437,7 +470,7 @@ QInt QInt::operator<<(int bits) {// Normal
 	}
 	return ans;
 }
-QInt QInt::operator>>(int bits) {// Ez
+QInt QInt::operator>>(int bits)const {// Ez
 	QInt ans = *this;
 	while (bits > 0) {
 		ans.moveRight();

@@ -23,8 +23,8 @@ public:// Bitwise operator, All Ez
 	QInt operator^(const QInt& num)const;
 	QInt operator~();
 public:// Shift operator
-	QInt operator<<(int bits);// Normal
-	QInt operator>>(int bits);// Ez
+	QInt operator<<(int bits)const;// Normal
+	QInt operator>>(int bits)const;// Ez
 private:
 	void moveLeft();
 	void moveRight();
