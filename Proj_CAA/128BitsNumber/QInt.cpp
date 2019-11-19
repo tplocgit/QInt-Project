@@ -79,15 +79,15 @@ uint8_t QInt::TwoPower(uint8_t n) {
 void QInt::setBit(uint8_t index, bool bitVal) {// Set value for bit of index 
 	if (0 <= int(index) && int(index) <= 63) {// The first element - Bits[0] contains bits from 0 -> 63
 		if (bitVal)// Bit = 1
-			this->Bits[0] = this->Bits[0] | (bitVal << (63 - index));
+			this->Bits[0] = this->Bits[0] | (int64_t(bitVal) << int64_t(63 - index));
 		else {// Bit = 0
-			int64_t a = int64_t(1) << (63 - index);
+			int64_t a = int64_t(1) << int64_t(63 - index);
 			this->Bits[0] = this->Bits[0] & (a ^ int64_t(-1));
 		}
 	}
 	else if (64 <= int(index) && int(index) <= 127) {// The last element - Bist[1] contains bits from 64 -> 127 
 		if (bitVal)// Bit = 1
-			this->Bits[1] = this->Bits[1] | (bitVal << (63 - (index - 64)));
+			this->Bits[1] = this->Bits[1] | (int64_t(bitVal) << int64_t(63 - (int64_t(index) - 64)));
 		else {// Bit = 0
 			int64_t a = int64_t(1) << (63 - (index - 64));
 			this->Bits[1] = this->Bits[1] & (a ^ int64_t(-1));
@@ -193,7 +193,7 @@ string QInt::Bin() {
 	stringstream writer;
 	for (int i = 0; i < 2; ++i)
 		for (int j = 0; j < 64; ++j)
-			writer << ((this->Bits[i] >> j) & int64_t(1));
+			writer << ((this->Bits[i] >> j)& int64_t(1));
 	return writer.str();
 }
 
@@ -232,11 +232,12 @@ char QInt::FourBitsToHex(string bits) {
 				throw "Error: Invalid data";
 			value += (QInt::CharToInt(bits[i])) * QInt::TwoPower(uint8_t(bits.length() - i - size_t(1)));
 		}
-		if (0 <= value && value <= 9)
-			return value;
-		else {
+		if (value >= 16)
+			throw "Error: Overflow!";
+		if (value >= 10 && value <= 15) {
 			return value + ' ' - 1;// ASCII, character start at 41 with A, ' ' is 32, 10 + 32 - 1 = 41 = A, 11 + 32 - 1 = 42 = B
 		}
+		return value;
 	}
 }
 
@@ -324,13 +325,13 @@ QInt& QInt::operator--() {
 
 QInt QInt::operator++(int x) {
 	QInt tmp = *this;
-	++*this;
+	++* this;
 	return tmp;
 }
 
 QInt QInt::operator--(int x) {
 	QInt tmp = *this;
-	--*this;
+	--* this;
 	return tmp;
 }
 
