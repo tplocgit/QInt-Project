@@ -12,5 +12,8 @@ int main()
 		cout << "Type: " << (*i)->checkData() << endl << endl;
 	}
 
+	for (int i = 0; i < list.size(); ++i)
+		delete list[i];
+	list.clear();
 	system("pause>nul");
 }

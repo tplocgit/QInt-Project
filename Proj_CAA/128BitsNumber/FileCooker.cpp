@@ -14,7 +14,6 @@ vector <Task*> readFile(string fileName) {
 	string s;
 	while (!reader.eof()) {
 		getline(reader, s, '\n');
-		cout << s << endl;;
 		if (s == "")
 			break;
 		Task* p = nullptr;
@@ -36,7 +35,6 @@ vector <Task*> readFile(string fileName) {
 
 Task*readLine(string lineInfo) {
 	vector<string> tokens = Tokenizer::Parse(lineInfo, " ");
-	cout << tokens.size() << endl;
 	Task* res = nullptr;
 	if (tokens.size() == 3) {
 		res = new Converter;

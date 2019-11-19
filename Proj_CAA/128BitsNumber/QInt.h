@@ -1,5 +1,7 @@
 #pragma once
+#include"Task.h"
 #include "Calculator.h"
+#include"Converter.h"
 #include "pch.h"
 //QInt
 class QInt {

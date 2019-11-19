@@ -29,3 +29,32 @@ void Calculator::setOperator(string input) {
 	else
 		throw "Invalid input";
 }
+
+void Calculator::ExeE() {
+	QInt* res = new QInt;
+	QInt* num1, * num2;
+	num1 = new QInt(this->Base(), this->Num1());
+
+	if (this->calOperator == ADD) {
+		num2 = new QInt(this->Base(), this->Num2());
+		*res = *num1 + *num2;
+		delete num2;
+	}
+	else if (this->calOperator == MINUS) {
+		num2 = new QInt(this->Base(), this->Num2());
+		*res = *num1 - *num2;
+		delete num2;
+	}
+	else if (this->calOperator == MOVE_LEFT) {
+		*res = *num1 << stoi(this->Num2());
+	}
+	else if (this->calOperator == MOVE_RIGHT) {
+		*res = *num2 >> stoi(this->Num2());
+	}
+	else
+		throw "Error: Operator is not defined!";
+
+	cout << res->Bin() << endl << res->Hex() << endl << res->Dec() << endl;
+	delete num1;
+	delete res;
+}

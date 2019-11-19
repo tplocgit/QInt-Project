@@ -21,6 +21,7 @@ void Task::setBase(string input) {
 		throw "Invalid input";
 }
 int Task::checkData() {
+	cout << this->num1 << " " << this->num2 << endl;
 	if (this->base == NONE)
 		return -1;//somethings went wrong 
 	if (this->num1 != "" && this->num2 == "")
@@ -37,6 +38,16 @@ void Task::setNum2(string input) {
 }
 
 //--------------------------------------------------------------------------
+
+BASE Task::Base() {
+	return this->base;
+}
+string Task::Num1() {
+	return this->num1;
+}
+string Task::Num2() {
+	return this->num2;
+}
 
 void Task::viewBase() {
 	if (this->base == NONE)

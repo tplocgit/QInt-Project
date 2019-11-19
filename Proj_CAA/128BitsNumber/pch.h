@@ -18,5 +18,4 @@
 #include<vector>
 
 using namespace std;
-
 #endif //PCH_H

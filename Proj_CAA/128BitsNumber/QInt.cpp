@@ -171,7 +171,7 @@ string QInt::DecToBin(string dec) {
 		dec = QInt::DecDiv(dec, 2);
 	}
 	reverse(res.begin(), res.end());
-	if (dec[0] = '-') {
+	if (dec[0] == '-') {
 		QInt tmp(res);
 		res = tmp.Negative().Bin();
 	}
@@ -201,7 +201,7 @@ string QInt::Hex() {
 	string bits = this->Bin();
 	stringstream writer;
 	for (int i = 0; i < 128; i += 4) {
-		string FourBits = bits.substr(i - 1, 4);// get sub string at i - 1 with length = 4
+		string FourBits = bits.substr(uint8_t(i) - uint8_t(1), 4);// get sub string at i - 1 with length = 4
 		writer << this->FourBitsToHex(FourBits);// convert 4 bits of sub string to hex value
 	}
 	return writer.str();
@@ -385,31 +385,38 @@ QInt QInt::operator-(const QInt& num) {// Normal
 }
 
 
-QInt QInt::operator*(const QInt& num) {// Hard
+/*QInt QInt::operator*(const QInt& num) {// Hard
 
-}
+}*/
 
 //-----------------------------------------------------------------
 
 QInt QInt::ROL() {// Ez
-	bool save = this->bitAt(0);
-	for (int i = 0; i < 127; ++i) {
-		this->setBit(i, this->bitAt(i + 1));
-	}
-	this->setBit(127, save);
+	QInt res = *this;
 
+	bool save = res.bitAt(0);
+	for (int i = 0; i < 127; ++i) {
+		res.setBit(i, res.bitAt(i + 1));
+	}
+	res.setBit(127, save);
+
+	return res;
 }
 
 QInt QInt::ROR() {// Ez
+	QInt res = *this;
+
 	bool save = this->bitAt(127);
 
 	for (int i = 127; i > 0; --i) {
-		this->setBit(i, this->bitAt(i - 1));
+		res.setBit(i, res.bitAt(i - 1));
 	}
-	this->setBit(0, save);
+	res.setBit(0, save);
+
+	return res;
 }
 
-//-----------------------------------------------------------------
+/*/-----------------------------------------------------------------
 QInt QInt::operator&(const QInt& num)const {
 
 }
@@ -421,7 +428,7 @@ QInt QInt::operator|(const QInt& num)const {
 QInt QInt::operator^(const QInt& num)const {
 
 }
-//-----------------------------------------------------------------
+*///-----------------------------------------------------------------
 QInt QInt::operator<<(int bits) {// Normal
 	QInt ans = *this;
 	while (bits > 0) {
