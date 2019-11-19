@@ -24,7 +24,8 @@ public:// Shift operator
 	QInt operator<<(int bits);// Normal
 	QInt operator>>(int bits);// Ez
 private:
-	
+	void moveLeft();
+	void moveRight();
 public:// Rolling operator
 	QInt ROL();// Ez
 	QInt ROR();// Ez

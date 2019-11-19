@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "QInt.h"
 
 //Big Three & construct--------------------------------------------------------------------------------------------------------
@@ -343,7 +343,7 @@ QInt QInt::operator~() {
 	return tmp;
 }
 
-//-----------------------------------------------------------------
+//-------------Datpt's part----------------------------------------------------
 QInt QInt::operator+(const QInt& num) {// Normal
 	QInt ans;
 	bool save = 0;// Ex: 1 + 1 = 10, save = 1, 1 + 0 = 1 save 0
@@ -384,7 +384,7 @@ QInt QInt::operator-(const QInt& num) {// Normal
 	return *this + (num.Negative());
 }
 
-/*
+
 QInt QInt::operator*(const QInt& num) {// Hard
 
 }
@@ -392,11 +392,21 @@ QInt QInt::operator*(const QInt& num) {// Hard
 //-----------------------------------------------------------------
 
 QInt QInt::ROL() {// Ez
+	bool save = this->bitAt(0);
+	for (int i = 0; i < 127; ++i) {
+		this->setBit(i, this->bitAt(i + 1));
+	}
+	this->setBit(127, save);
 
 }
 
 QInt QInt::ROR() {// Ez
+	bool save = this->bitAt(127);
 
+	for (int i = 127; i > 0; --i) {
+		this->setBit(i, this->bitAt(i - 1));
+	}
+	this->setBit(0, save);
 }
 
 //-----------------------------------------------------------------
@@ -413,9 +423,33 @@ QInt QInt::operator^(const QInt& num)const {
 }
 //-----------------------------------------------------------------
 QInt QInt::operator<<(int bits) {// Normal
-
+	QInt ans = *this;
+	while (bits > 0) {
+		ans.moveLeft();
+		--bits;
+	}
+	return ans;
 }
 QInt QInt::operator>>(int bits) {// Ez
-
+	QInt ans = *this;
+	while (bits > 0) {
+		ans.moveRight();
+		--bits;
+	}
+	return ans;
 }
-*/
+
+void QInt::moveLeft() {
+	for (int i = 0; i < 127; ++i) {
+		this->setBit(i, this->bitAt(i + 1));
+	}
+	this->setBit(127, 0);
+}
+void QInt::moveRight() {
+	//dịch số học 
+	bool save = this->bitAt(0);
+	for (int i = 127; i > 0; --i) {
+		this->setBit(i, this->bitAt(i - 1));
+	}
+	this->setBit(0, save);
+}

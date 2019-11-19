@@ -13,10 +13,20 @@ vector <Task*> readFile(string fileName) {
 	vector <Task*> list;
 	string s;
 	while (!reader.eof()) {
-		getline(reader, s);
+		getline(reader, s, '\n');
+		cout << s << endl;;
 		if (s == "")
 			break;
-		Task*p = readLine(s);
+		Task* p = nullptr;
+		try {
+			p = readLine(s);
+		}
+		catch (string k) {
+			cout << k << endl;
+			system("pause>nul");
+			exit(0);
+		}
+			
 		list.push_back(p);
 	}
 	reader.close();
@@ -26,7 +36,7 @@ vector <Task*> readFile(string fileName) {
 
 Task*readLine(string lineInfo) {
 	vector<string> tokens = Tokenizer::Parse(lineInfo, " ");
-	
+	cout << tokens.size() << endl;
 	Task* res = nullptr;
 	if (tokens.size() == 3) {
 		res = new Converter;
@@ -42,7 +52,7 @@ Task*readLine(string lineInfo) {
 		res->setNum2(tokens[3]);
 	}
 	else 
-		throw "Error: Invalid input";
+		throw "Error: Invalid file input";
 	
 
 	return res;

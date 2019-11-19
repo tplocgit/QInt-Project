@@ -9,7 +9,7 @@ int main()
 	vector<Task*> list = readFile("sampleInput.txt");
 
 	for (auto i = list.begin(); i != list.end(); ++i) {
-		//cout << "Type: " << (*i)->checkData() << endl;
+		cout << "Type: " << (*i)->checkData() << endl << endl;
 	}
 
 	system("pause>nul");
