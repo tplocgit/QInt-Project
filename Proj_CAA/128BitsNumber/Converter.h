@@ -7,7 +7,9 @@ class Converter : public Task {
 private:
 	CASE1 convertOperator;
 public:
-	void ExeE();
+	Task* Alloc();
+	void ShowAllInfor();
+	QInt* Exe();
 	Converter();
 	Converter(string num);
 	void setOperator(string input);

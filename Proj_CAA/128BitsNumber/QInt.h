@@ -1,8 +1,7 @@
 #pragma once
-#include"Task.h"
-#include "Calculator.h"
-#include"Converter.h"
 #include "pch.h"
+#include "Type.h"
+
 //QInt
 class QInt {
 private:
@@ -58,5 +57,5 @@ public:
 	QInt(const QInt& obj);
 	QInt operator=(const QInt& obj);
 	QInt();
-	virtual ~QInt();
+	~QInt();
 };

@@ -1,4 +1,4 @@
-#pragma one
+#pragma once
 #include "pch.h"
 #include "Type.h"
 #include"QInt.h"
@@ -8,7 +8,7 @@ private:
 	BASE base;
 	string num1, num2;
 public:
-	virtual void ExeE() = 0;
+	virtual QInt* Exe() = 0;
 	virtual void setOperator(string input) = 0;
 	void setNum1(string input);
 	void setNum2(string input);
@@ -20,8 +20,12 @@ public:
 	BASE Base();
 	string Num1();
 	string Num2();
+	//--------------------------------------
 	int checkData();
 	void viewBase();
 	void viewNum1();
 	void viewNum2();
+	virtual void ShowAllInfor();
+	//-------------------------------------
+	virtual Task* Alloc()=0;
 };

@@ -7,7 +7,9 @@ class Calculator : public Task{
 private:
 	CASE2 calOperator;
 public:
-	void ExeE();
+	Task* Alloc();
+	void ShowAllInfor();
+	QInt* Exe();
 	Calculator();
 	Calculator(string num1, string num2);
 	void setOperator(string input);
