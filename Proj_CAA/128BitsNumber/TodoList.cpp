@@ -9,11 +9,11 @@ void TodoList::checkList() {
 	}
 }
 
-void TodoList::doTask(){
+vector<QInt*> TodoList::doTask(){
 	vector<QInt*> res;
 	for (auto it = this->m_list.begin(); it != this->m_list.end(); ++it)
 		res.push_back((*it)->Exe());
-	//return res;
+	return res;
 }
 
 TodoList TodoList::operator= (const TodoList& list) {

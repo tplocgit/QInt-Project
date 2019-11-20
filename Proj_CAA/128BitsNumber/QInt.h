@@ -5,7 +5,7 @@
 //QInt
 class QInt {
 private:
-	int64_t* Bits;
+	int64_t Bits[2];
 public:// Calculating operator
 	QInt operator+(const QInt& num);// Normal
 	QInt operator-(const QInt& num);// Normal
@@ -14,13 +14,13 @@ public:// Calculating operator
 public:// Others operator
 	QInt& operator++();
 	QInt& operator--();
-	QInt operator++(int x);
-	QInt operator--(int x);
+	QInt operator++(int x);// Fixed
+	QInt operator--(int x);// Fixed
 public:// Bitwise operator, All Ez
 	QInt operator&(const QInt& num)const;
 	QInt operator|(const QInt& num)const;
 	QInt operator^(const QInt& num)const;
-	QInt operator~();
+	QInt operator~()const;
 public:// Shift operator
 	QInt operator<<(int bits)const;// Normal
 	QInt operator>>(int bits)const;// Ez
@@ -32,13 +32,15 @@ public:// Rolling operator
 	QInt ROR();// Ez
 public:// Convert method
 	string Dec();// Extra Supper Hard
-	string Bin();// DKM EZ VKL
+	string Bin();// Modified, DKM EZ VKL
 	string Hex();// Ez
 public:// Some support method
+	string BitsFrom(uint8_t startPos, uint8_t endPos);// New
+	bool operator[](int index)const;// New
 	void setBit(uint8_t index, bool value);// Set value for bit of index
-	QInt ComplementOfOne();
+	QInt ComplementOfOne()const;// Modified
 	QInt Negative()const;// Return a two's complement number of its
-	bool bitAt(uint8_t index)const;// Get bit at index
+	bool bitAt(uint8_t index)const;// Modified, Get bit at index
 	bool lastBit();// Return last bit
 	static char FourBitsToHex(string bits);// Converts 4 bits to Hex value
 	static uint8_t CharToInt(unsigned char input);// Convert one char to int value 8 bit, 0 <= value <= 9

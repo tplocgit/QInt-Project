@@ -45,6 +45,17 @@ QInt* Calculator::Exe() {
 		*res = *num1 - *num2;
 		delete num2;
 	}
+	else if (this->calOperator == MULTIPLY) {
+		num2 = new QInt(this->Base(), this->Num2());
+		*res = *num1 * *num2;
+		delete num2;
+	}
+	else if (this->calOperator == DIVIDE) {
+		//num2 = new QInt(this->Base(), this->Num2());
+		*res = *num1;// - *num2;
+		//delete num2;
+	}
+
 	else if (this->calOperator == MOVE_LEFT) {
 		*res = *num1 << stoi(this->Num2());
 	}
@@ -53,8 +64,7 @@ QInt* Calculator::Exe() {
 	}
 	else
 		throw "Error: Operator is not defined!";
-
-	cout << res->Bin() << endl << res->Hex() << endl << res->Dec() << endl;
+	cout << res->Bin() << endl;
 	delete num1;
 	return res;
 }
