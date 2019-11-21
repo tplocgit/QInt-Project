@@ -47,9 +47,8 @@ QInt* Calculator::Exe() {
 		*res = num1 * num2;
 	}
 	else if (this->calOperator == DIVIDE) {
-		//QInt num2(this->Base(), this->Num2());
-		*res = num1;// - *num2;
-		//delete num2;
+		QInt num2(this->Base(), this->Num2());
+		*res = num1 / num2;
 	}
 	else if (this->calOperator == OR) {
 		QInt num2(this->Base(), this->Num2());

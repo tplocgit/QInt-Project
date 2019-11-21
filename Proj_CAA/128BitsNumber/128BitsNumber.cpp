@@ -8,12 +8,13 @@
 
 int main()
 {
+	/*
 	vector<Task*> list = readFile("sampleInput.txt");
 
 	TodoList doList(list);
 	//cout << "Plz Check data input";
 	//doList.checkList();
-
+	
 	vector<QInt*> resList = doList.doTask();
 
 	//cout << "List of result: \n";
@@ -30,7 +31,13 @@ int main()
 		delete* it;
 
 	resList.clear();
+	*/
+	string s1, s2;
+	cin >> s1 >> s2;
+	QInt p1(s1), p2(s2),
+		ans = p1 / p2;
 
+	cout << ans.Bin();
 
 	system("pause>nul");
 	return 0;
