@@ -32,7 +32,6 @@ int main()
 	resList.clear();
 
 
-
 	system("pause>nul");
 	return 0;
 }
