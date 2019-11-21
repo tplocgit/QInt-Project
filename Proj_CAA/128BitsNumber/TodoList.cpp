@@ -3,16 +3,21 @@
 
 
 void TodoList::checkList() {
+	int count = 0;
+	cout << endl;
 	for (auto it = this->m_list.begin(); it != this->m_list.end(); ++it) {
+		cout << "Task " << ++count << endl;
 		(*it)->ShowAllInfor();
 		cout << endl;
 	}
 }
 
-vector<QInt*> TodoList::doTask(){
+vector<QInt*> TodoList::doTask() {
 	vector<QInt*> res;
-	for (auto it = this->m_list.begin(); it != this->m_list.end(); ++it)
+	int count = 1;
+	for (auto it = this->m_list.begin(); it != this->m_list.end(); ++it) {
 		res.push_back((*it)->Exe());
+	}
 	return res;
 }
 

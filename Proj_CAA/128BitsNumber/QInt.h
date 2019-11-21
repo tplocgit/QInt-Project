@@ -43,12 +43,13 @@ public:// Some support method
 	bool bitAt(uint8_t index)const;// Modified, Get bit at index
 	bool lastBit();// Return last bit
 	static char FourBitsToHex(string bits);// Converts 4 bits to Hex value
-	static uint8_t CharToInt(unsigned char input);// Convert one char to int value 8 bit, 0 <= value <= 9
+	static uint8_t CharToInt(char input);// Convert one char to int value 8 bit, 0 <= value <= 9
 	static unsigned char IntToChar(uint8_t input);// 
 	static string DecDiv(string val, uint8_t divided);
 	static string HexToFourBits(unsigned char hex);
 	static uint8_t TwoPower(uint8_t n);// 2^n up to 2^8
 	static string AddTwoDec(string dec1, string dec2);
+	static string DeleteAllZeroAtHead(string str);
 public:// Read file
 	static string DecToBin(string dec);// Hard
 	static string HexToBin(string hex);// Ez

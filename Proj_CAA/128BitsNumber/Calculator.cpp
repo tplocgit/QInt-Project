@@ -32,40 +32,48 @@ void Calculator::setOperator(string input) {
 
 QInt* Calculator::Exe() {
 	QInt* res = new QInt;
-	QInt* num1, * num2;
-	num1 = new QInt(this->Base(), this->Num1());
+	QInt num1(this->Base(), this->Num1());
 
 	if (this->calOperator == ADD) {
-		num2 = new QInt(this->Base(), this->Num2());
-		*res = *num1 + *num2;
-		delete num2;
+		QInt num2(this->Base(), this->Num2());
+		*res = num1 + num2;
 	}
 	else if (this->calOperator == MINUS) {
-		num2 = new QInt(this->Base(), this->Num2());
-		*res = *num1 - *num2;
-		delete num2;
+		QInt num2(this->Base(), this->Num2());
+		*res = num1 - num2;
 	}
 	else if (this->calOperator == MULTIPLY) {
-		num2 = new QInt(this->Base(), this->Num2());
-		*res = *num1 * *num2;
-		delete num2;
+		QInt num2(this->Base(), this->Num2());
+		*res = num1 * num2;
 	}
 	else if (this->calOperator == DIVIDE) {
-		//num2 = new QInt(this->Base(), this->Num2());
-		*res = *num1;// - *num2;
+		//QInt num2(this->Base(), this->Num2());
+		*res = num1;// - *num2;
 		//delete num2;
+	}
+	else if (this->calOperator == OR) {
+		QInt num2(this->Base(), this->Num2());
+		*res = num1 | num2;
+	}
+	else if (this->calOperator == XOR) {
+		QInt num2(this->Base(), this->Num2());
+		*res = num1 ^ num2;
+	}
+	else if (this->calOperator == AND) {
+		QInt num2(this->Base(), this->Num2());
+		*res = num1 & num2;
 	}
 
 	else if (this->calOperator == MOVE_LEFT) {
-		*res = *num1 << stoi(this->Num2());
+		*res = num1 << stoi(this->Num2());
 	}
 	else if (this->calOperator == MOVE_RIGHT) {
-		*res = *num1 >> stoi(this->Num2());
+		*res = num1 >> stoi(this->Num2());
 	}
 	else
 		throw "Error: Operator is not defined!";
-	cout << res->Bin() << endl;
-	delete num1;
+	//cout << res->Bin() << endl;
+	//delete num1;
 	return res;
 }
 

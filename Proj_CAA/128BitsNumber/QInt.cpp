@@ -57,6 +57,18 @@ QInt::QInt(BASE inputType, string value) {
 
 // Support method-------------------------------------------------------------------------------------------------------------
 
+string QInt::DeleteAllZeroAtHead(string str) {
+	auto it = str.begin();
+	for (it; it != str.end() && *it == '0'; ++it);
+
+	if (it == str.end())
+		return "0";
+
+	str.erase(str.begin(), it);
+
+	return str;
+}
+
 string QInt::BitsFrom(uint8_t startPos, uint8_t endPos) {
 	if (startPos < 0 || endPos >127)
 		throw "Error: Out of range!";
@@ -127,6 +139,9 @@ bool QInt::bitAt(uint8_t index) const {
 	return bit;
 }
 
+bool QInt::operator[](int index)const {// New
+	return this->bitAt(index);
+}
 QInt QInt::ComplementOfOne()const {
 	QInt tmp = *this;
 	if (!(*this)[0]) // Fist bit = 0
@@ -186,22 +201,18 @@ string QInt::DecToBin(string dec) {
 
 	if (dec[0] == '-')
 		Neg = true;
-	cout << "Decimal = " << dec << endl;
 	while (dec != "0") {
 		bool bit = QInt::CharToInt(dec.back()) % 2;
 		res.push_back(IntToChar(bit));
 		dec = QInt::DecDiv(dec, 2);
 	}
 	reverse(res.begin(), res.end());
-	cout << "Abs(bits) = " << res << endl;
 	if (Neg) {
 		QInt tmp(res);
-		cout << "128 bits = " << tmp.Bin() << endl;
 		tmp = tmp.Negative();
 		res = tmp.Bin();
 	}
 
-	cout << "Bits = " << res << endl;
 	return res;
 }
 
@@ -224,18 +235,20 @@ string QInt::Bin() {
 }
 
 string QInt::Hex() {
+	//cout << "To Hex\n";
 	string bits = this->Bin();
-	stringstream writer;
+	string hex;
 	for (int i = 0; i < 128; i += 4) {
-		string FourBits = bits.substr(uint8_t(i) - uint8_t(1), 4);// get sub string at i - 1 with length = 4
-		writer << this->FourBitsToHex(FourBits);// convert 4 bits of sub string to hex value
+		string FourBits = bits.substr(i, 4);// get sub string at i - 1 with length = 4
+		char hexChar = QInt::FourBitsToHex(FourBits);
+		hex.push_back(hexChar);// convert 4 bits of sub string to hex value
 	}
-	return writer.str();
+	return hex;
 }
 //--------------------------------------------------------------------
 
-uint8_t QInt::CharToInt(unsigned char input) {
-	if (input - '0' < 0 || input - '0' > 9)
+uint8_t QInt::CharToInt(char input) {
+	if (input < '0' || input  > '9')
 		throw "Error: Invalid Char!";
 	else
 		return input - '0';// ASCII, 0 start at 48 so we need to subtract value by 48 to get int value
@@ -252,18 +265,23 @@ char QInt::FourBitsToHex(string bits) {
 	if (bits.length() != 4)
 		throw "Error: Invalid length!";
 	else {
+		char hexChar;
 		uint8_t value = 0;
 		for (size_t i = 0; i < bits.length(); ++i) {
 			if (bits[i] != '0' && bits[i] != '1')
 				throw "Error: Invalid data";
-			value += (QInt::CharToInt(bits[i])) * QInt::TwoPower(uint8_t(bits.length() - i - size_t(1)));
+			bool bit = QInt::CharToInt(bits[i]);
+			uint8_t exp = uint8_t(bits.length() - i - size_t(1));
+			uint16_t mul = QInt::TwoPower(exp);
+			value += bit * mul;
 		}
-		if (value >= 16)
+		if (value > 15 || value < 0)
 			throw "Error: Overflow!";
-		if (value >= 10 && value <= 15) {
-			return value + ' ' - 1;// ASCII, character start at 41 with A, ' ' is 32, 10 + 32 - 1 = 41 = A, 11 + 32 - 1 = 42 = B
-		}
-		return value;
+		if (value >= 10)
+			hexChar = value + 'A' - 10;
+		else
+			hexChar = value + '0';
+		return hexChar;
 	}
 }
 
@@ -361,10 +379,13 @@ QInt QInt::operator--(int x) {
 
 //Bit Wise operator-----------------------------------------------------------------------------------------------------------
 QInt QInt::operator~()const {
-	QInt tmp = *this;
-	for (int i = 0; i < 128; ++i)
-		tmp.setBit(i, !tmp[i]);
-	return tmp;
+	QInt ans = *this;
+	/*for (int i = 0; i < 128; ++i)
+		tmp.setBit(i, !tmp[i]);*/
+
+	ans.Bits[0] = ~(this->Bits[0]);
+	ans.Bits[1] = ~(this->Bits[1]);
+	return ans;
 }
 
 //-------------Datpt's part----------------------------------------------------
@@ -414,14 +435,16 @@ QInt QInt::operator*(const QInt& num) {// Hard
 	for (int i = 127; i > 0; --i) {
 		if (num.bitAt(i) == 1) {
 			QInt tmp = (num << count);
-			ans = ans + tmp;
+			ans = (ans + tmp);
 		}
 		++count;
 	}
 	return ans;
 }
 
-
+QInt QInt::operator/(const QInt& num) {// Extra Supper Hard
+	return *this;
+}
 //-----------------------------------------------------------------
 
 QInt QInt::ROL() {// Ez
@@ -453,25 +476,30 @@ QInt QInt::ROR() {// Ez
 
 QInt QInt::operator&(const QInt& num)const {
 	QInt ans;
-	for (int i = 127; i >= 0; --i) {
+	/*for (int i = 127; i >= 0; --i) {
 		ans.setBit(i, (this->bitAt(i) & num.bitAt(i)));
-	}
+	}*/
+
+	ans.Bits[0] = this->Bits[0] & num.Bits[0];
+	ans.Bits[1] = this->Bits[1] & num.Bits[1];
 	return ans;
 }
 
 QInt QInt::operator|(const QInt& num)const {
 	QInt ans;
-	for (int i = 127; i >= 0; --i) {
-		ans.setBit(i, (this->bitAt(i) | num.bitAt(i)));
-	}
+	ans.Bits[0] = this->Bits[0] | num.Bits[0];
+	ans.Bits[1] = this->Bits[1] | num.Bits[1];
 	return ans;
 }
 
 QInt QInt::operator^(const QInt& num)const {
 	QInt ans;
-	for (int i = 127; i >= 0; --i) {
+	/*for (int i = 127; i >= 0; --i) {
 		ans.setBit(i, (this->bitAt(i) ^ num.bitAt(i)));
-	}
+	}*/
+
+	ans.Bits[0] = this->Bits[0] ^ num.Bits[0];
+	ans.Bits[1] = this->Bits[1] ^ num.Bits[1];
 	return ans;
 }
 

@@ -11,21 +11,27 @@ int main()
 	vector<Task*> list = readFile("sampleInput.txt");
 
 	TodoList doList(list);
-	cout << "Plz Check data input";
-	doList.checkList();
+	//cout << "Plz Check data input";
+	//doList.checkList();
 
 	vector<QInt*> resList = doList.doTask();
 
-	cout << "List of result: \n";
+	//cout << "List of result: \n";
+	uint16_t count = 0;
 	for (auto it = resList.begin(); it != resList.end(); ++it) {
-		cout <<"Binary: "<< (*it)->Bin()<<endl;
-		cout << "Hexadecimal: " << (*it)->Hex() << endl;
-		cout << "Decimal: " << (*it)->Dec() << endl;
+		cout << "\n\nTask " << ++count << endl;
+		(list[count - 1])->ShowAllInfor();
+		cout << "=>>Result: \n";
+		cout << "Binary: " << QInt::DeleteAllZeroAtHead((*it)->Bin()) << endl;
+		cout << "Hexadecimal: " << QInt::DeleteAllZeroAtHead((*it)->Hex()) << endl;
+		cout << "Decimal: " << QInt::DeleteAllZeroAtHead((*it)->Dec()) << endl;
 	}
 	for (auto it = resList.begin(); it != resList.end(); ++it)
 		delete* it;
 
 	resList.clear();
+
+
 
 	system("pause>nul");
 	return 0;

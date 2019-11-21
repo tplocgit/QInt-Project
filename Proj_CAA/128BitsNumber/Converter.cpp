@@ -26,24 +26,24 @@ void Converter::setOperator(string input) {
 }
 
 QInt* Converter::Exe() {
-	QInt* res = new QInt;
+	QInt* res;
 	QInt* num1 = new QInt(this->Base(), this->Num1());
 
 
 	if (this->convertOperator == CON_DEC)
-		*res = num1->Dec();
+		res = new QInt(*num1);
 	else if (this->convertOperator == CON_HEX)
-		*res = num1->Hex();
+		res = new QInt(*num1);
 	else if (this->convertOperator == CON_BIN)
-		*res = num1->Bin();
+		res = new QInt(*num1);
 	else if (this->convertOperator == ROL)
-		*res = num1->ROL();
+		res = new QInt(num1->ROL());
 	else if (this->convertOperator == ROR)
-		*res = num1->ROR();
+		res = new QInt(num1->ROR());
 	else if (this->convertOperator == NOT)
-		*res = ~(*num1);
+		res = new QInt(~(*num1));
 	else
-		throw "Error: Deo hieu luon a";
+		throw "Error: Deo hieu luon a. T nhin ma t tuc a";
 	delete num1;
 	return res;
 	//cout << res->Bin() << endl << res->Hex() << endl << res->Dec() << endl;
