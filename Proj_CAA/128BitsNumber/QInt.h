@@ -50,6 +50,11 @@ public:// Some support method
 	static uint8_t TwoPower(uint8_t n);// 2^n up to 2^8
 	static string AddTwoDec(string dec1, string dec2);
 	static string DeleteAllZeroAtHead(string str);
+	static string TwoPowerToSrting(uint8_t n);
+	static string SumTwoStringNumber(string num1, string num2);
+	static string SubTwoStringNumber(string num1, string num2);
+	static string MulTwoStringNumber(string num1, string num2);
+	static string MulStringWithNumber(string num , uint8_t muler);
 public:// Read file
 	static string DecToBin(string dec);// Hard
 	static string HexToBin(string hex);// Ez

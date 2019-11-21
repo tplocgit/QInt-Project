@@ -57,14 +57,186 @@ QInt::QInt(BASE inputType, string value) {
 
 // Support method-------------------------------------------------------------------------------------------------------------
 
+string QInt::SumTwoStringNumber(string num1, string num2) {
+	bool save = false;
+	auto it1 = num1.rbegin();// Begin of reversed string
+	auto it2 = num2.rbegin();
+	string res;
+	while (it1 != num1.rend() || it2 != num2.rend() || save) {
+		uint8_t dig1 = 0;
+		uint8_t dig2 = 0;
+		if (it1 != num1.rend()) {
+			dig1 = QInt::CharToInt(*it1);
+			++it1;
+		}
+		if (it2 != num2.rend()) {
+			dig2 = QInt::CharToInt(*it2);
+			++it2;
+		}
+		uint8_t sumDig = dig1 + dig2 + uint8_t(save);
+		save = false;
+		if (sumDig > 9) {
+			sumDig %= 10;
+			save = true;
+		}
+		char charDig = QInt::IntToChar(sumDig);
+		res.push_back(charDig);
+	}
+	reverse(res.begin(), res.end());
+	return res;
+}
+
+string QInt::SubTwoStringNumber(string num1, string num2) {
+	if (num1 == num2)
+		return "0";
+	bool isNeg = num1.length() < num2.length();
+	if (num1.length() == num2.length()) {
+		auto it1 = num1.rbegin();// Begin of reversed string
+		auto it2 = num2.rbegin();
+		while (it1 != num1.rend() && it2 != num2.rend() && *it1 == *it2) {
+			++it1;
+			++it2;
+		}
+		isNeg = *it1 < *it2;
+	}
+	if (isNeg) {
+		string tmp = num1;
+		num1 = num2;
+		num2 = tmp;
+	}
+	string res;
+	bool borrow = false;
+	auto it1 = num1.rbegin();// Begin of reversed string
+	auto it2 = num2.rbegin();
+	while (it1 != num1.rend() || it2 != num2.rend() || borrow) {
+		int8_t dig1 = 0;
+		int8_t dig2 = 0;
+		if (it1 != num1.rend()) {
+			dig1 = QInt::CharToInt(*it1);
+			++it1;
+		}
+		if (it2 != num2.rend()) {
+			dig2 = QInt::CharToInt(*it2);
+			++it2;
+		}
+		int8_t subDig = dig1 - dig2 - int8_t(borrow);
+		borrow = false;
+		if (subDig < 0) {
+			subDig += 10;
+			borrow = true;
+		}
+		char charDig = QInt::IntToChar(subDig);
+		res.push_back(charDig);
+	}
+	if (isNeg)
+		res.push_back('-');
+	auto itStart = res.begin();
+	if (*itStart == '-')
+		++itStart;
+	auto itEnd = itStart;
+	while (itEnd != res.end() && *itEnd == '0')
+		++itEnd;
+	res.erase(res.begin(), itEnd);
+	reverse(res.begin(), res.end());
+	return res;
+}
+
+string QInt::MulStringWithNumber(string num, uint8_t muler) {
+	if (muler > 9)
+		throw "Error: Multiplier overflow!";
+
+	if (muler == 0)
+		return "0";
+	else if (muler == 1)
+		return num;
+
+	bool isNeg = false;
+	if (num.front() == '-') {
+		num.erase(num.begin());
+		isNeg = true;
+	}
+
+	uint8_t save = 0;
+	auto it = num.rbegin();
+	string res;
+	while (it != num.rend() || save != 0) {
+		uint8_t dig = 0;
+		if (it != num.rend()) {
+			dig = QInt::CharToInt(*it);
+			++it;
+		}
+		uint16_t calculus = dig * muler + save;
+		save = 0;
+		if (calculus > 9) {
+			save = calculus / 10;
+			calculus %= 10;
+		}
+		char charDig = QInt::IntToChar(calculus);
+		res.push_back(charDig);
+	}
+
+	if (isNeg)
+		res.push_back('-');
+
+	reverse(res.begin(), res.end());
+
+	return res;
+}
+
+string QInt::MulTwoStringNumber(string num1, string num2) {
+	bool isNeg = false;
+	if (num1.front() == '-' && num2.front() != '-') {
+		num1.erase(num1.begin());
+		isNeg = true;
+	}
+	else if (num1.front() == '-' && num2.front() == '-') {
+		num1.erase(num1.begin());
+		num2.erase(num2.begin());
+	}
+	else if (num1.front() != '-' && num2.front() == '-') {
+		num2.erase(num1.begin());
+		isNeg = true;
+	}
+
+	auto it = num2.rbegin();
+	string res = "0";
+
+	uint8_t exp = 0;
+
+	for (auto it = num2.rbegin(); it != num2.rend(); ++it, ++exp) {
+		uint8_t muler = QInt::CharToInt(*it);
+		string calMuler = MulStringWithNumber(num1, muler);
+		for (int i = 0; i < exp; ++i)
+			calMuler.push_back('0');
+		res = QInt::SumTwoStringNumber(res, calMuler);
+	}
+
+	if (isNeg)
+		res.insert(res.begin(), '-');
+	return res;
+}
+
+string QInt::TwoPowerToSrting(uint8_t n) {
+	string res("1");
+	for (int i = 0; i < n; ++i)
+		res = QInt::MulStringWithNumber(res, 2);
+	return res;
+}
+
 string QInt::DeleteAllZeroAtHead(string str) {
 	auto it = str.begin();
+	bool isNeg = false;
+	if (str.front() == '-') {
+		++it;
+		isNeg = true;
+	}
+
 	for (it; it != str.end() && *it == '0'; ++it);
 
 	if (it == str.end())
 		return "0";
 
-	str.erase(str.begin(), it);
+	str.erase(str.begin() + isNeg, it);
 
 	return str;
 }
@@ -224,7 +396,18 @@ string QInt::HexToBin(string hex) {
 }
 
 string QInt::Dec() {
-	return "";
+	string res = "0";
+	for (int i = 1; i < 128; ++i)
+		if ((*this)[i]) {
+			string num = QInt::TwoPowerToSrting(127 - i);
+			res = QInt::SumTwoStringNumber(res, num);
+		}
+	if ((*this)[0] == 1) {
+		string num = QInt::TwoPowerToSrting(127);
+		res = QInt::SubTwoStringNumber(res, num);
+	}
+
+	return res;
 }
 
 string QInt::Bin() {

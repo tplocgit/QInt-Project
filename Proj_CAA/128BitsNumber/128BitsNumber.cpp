@@ -8,7 +8,7 @@
 
 int main()
 {
-	vector<Task*> list = readFile("sampleInput.txt");
+	/*vector<Task*> list = readFile("sampleInput.txt");
 
 	TodoList doList(list);
 	//cout << "Plz Check data input";
@@ -30,9 +30,13 @@ int main()
 		delete* it;
 
 	resList.clear();
-
-
-
+	*/
+	string bits;
+	cin >> bits;
+	QInt a(bits);
+	for (int i = 0; i <= 120; ++i)
+		a.setBit(i, 1);
+	cout << QInt::DeleteAllZeroAtHead(a.Dec()) << endl;
 	system("pause>nul");
 	return 0;
 }
