@@ -396,7 +396,9 @@ QInt QInt::operator*(const QInt& num) {// Hard
 	}
 	return ans;
 }
-
+QInt QInt::operator/(const QInt& num) {
+	
+}
 
 //-----------------------------------------------------------------
 
