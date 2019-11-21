@@ -576,15 +576,15 @@ QInt QInt::operator+(const QInt& num) {// Normal
 	QInt ans;
 	bool save = 0;// Ex: 1 + 1 = 10, save = 1, 1 + 0 = 1 save 0
 
-	for (int i = 127; i >= 0; --i) {
-		if (ans.bitAt(i) == 1 && num.bitAt(i) == 1) {// bit = 1
+	for (int i = 127; i >= 0; --i) { 
+		if (this->bitAt(i) == 1 && num.bitAt(i) == 1) {// bit = 1
 			if (save)
 				ans.setBit(i, 1);
 			else
 				ans.setBit(i, 0);
 			save = 1;
 		}
-		else if (ans.bitAt(i) == 0 && num.bitAt(i) == 0) {
+		else if (this->bitAt(i) == 0 && num.bitAt(i) == 0) {
 			if (save)
 				ans.setBit(i, 1);
 			else
@@ -613,14 +613,13 @@ QInt QInt::operator-(const QInt& num) {// Normal
 }
 
 QInt QInt::operator*(const QInt& num) {// Hard
-	QInt ans = *this;
-	int count = 0;
+	QInt ans;
 	for (int i = 127; i > 0; --i) {
+		int shift = 127 - i;
 		if (num.bitAt(i) == 1) {
-			QInt tmp = (num << count);
+			QInt tmp = (*this << shift);
 			ans = (ans + tmp);
 		}
-		++count;
 	}
 	return ans;
 }
@@ -705,16 +704,20 @@ QInt QInt::operator>>(int bits)const {// Ez
 }
 
 void QInt::moveLeft() {
-	for (int i = 0; i < 127; ++i) {
-		this->setBit(i, this->bitAt(i + 1));
-	}
+	for (int i = 0; i < 127; ++i)
+		this->setBit(i, (*this)[i + 1]);
 	this->setBit(127, 0);
 }
 void QInt::moveRight() {
 	//dịch số học 
-	bool save = this->bitAt(0);
-	for (int i = 127; i > 0; --i) {
-		this->setBit(i, this->bitAt(i - 1));
+	/*bool save = this->bitAt(0);
+	for (int i = 0; i < 127; ++i) {
+		this->setBit(i + 1, this->bitAt(i));
 	}
+	this->setBit(0, save);
+	*/
+	bool save = this->bitAt(0);
+	for (int i = 127; i > 0; --i)
+		this->setBit(i, (*this)[i - 1]);
 	this->setBit(0, save);
 }
