@@ -7,7 +7,8 @@ private:
 	vector<Task*> m_list;
 public:
 	void checkList();
-	vector<QInt*> doTask();
+	//vector<QInt*> doTask();
+	vector<string> doTask();
 public:
 	TodoList operator= (const TodoList& list);
 	TodoList(const TodoList& list);

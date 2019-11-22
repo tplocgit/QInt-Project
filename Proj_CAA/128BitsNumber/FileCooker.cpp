@@ -55,3 +55,20 @@ Task*readLine(string lineInfo) {
 
 	return res;
 }
+
+//----------------------------
+void outputFile(vector <string> output, string outputName) {
+	if (output.empty())
+		throw "Error: empty output";
+
+	ofstream printer;
+	printer.open(outputName);
+
+	if (!printer.is_open())
+		throw "Error: can not open file";
+	for (auto i = 0; i < output.size(); ++i) {
+		printer << output[i] << '\n';
+	}
+
+	printer.close();
+}

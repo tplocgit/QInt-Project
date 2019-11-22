@@ -625,7 +625,31 @@ QInt QInt::operator*(const QInt& num) {// Hard
 }
 
 QInt QInt::operator/(const QInt& num) {// Extra Supper Hard
-	return *this;
+	QInt object;//000....0000 by default
+	QInt ans(*this);
+	int k = 128;
+	if (this->bitAt(0) == 1) {//this < 0		
+		//turn into 1111....1111
+		object.Bits[0] = 1;
+		object.Bits[1] = 1;
+	}
+	bool save;
+	for (; k > 0; --k) {
+		save = ans.bitAt(0);//save most significant bit
+		ans.moveLeft();
+		object.moveLeft();
+		object.setBit(127, save);//put it here
+
+		object = object - num;
+		if (object.bitAt(0) == 1) {//ans < 0
+			object = object + num;//restore
+			ans.setBit(127, 0);
+		}
+		else 
+			ans.setBit(127, 1);
+	}
+	//ans: thương - object: số dư 
+	return ans;
 }
 //-----------------------------------------------------------------
 
