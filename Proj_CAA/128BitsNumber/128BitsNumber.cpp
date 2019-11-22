@@ -8,10 +8,13 @@
 
 int main()
 {
-	
 	vector<Task*> list = readFile("sampleInput.txt");
+
 	TodoList doList(list);
+
 	vector<string> resList = doList.doTask();
+	
+	
 	try {
 		outputFile(resList, "output.txt");
 	}
@@ -20,14 +23,12 @@ int main()
 		system("pause>nul");
 		exit(0);
 	}
-
-	for (auto it = resList.begin(); it != resList.end(); ++it)
+	
+	for (auto it = list.begin(); it != list.end(); ++it)
 		delete* it;
-
-	resList.clear();
+	list.clear();
 
 	cout << "finished";
-
 	system("pause>nul");
 	return 0;
 }

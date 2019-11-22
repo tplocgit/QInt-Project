@@ -37,7 +37,6 @@ QInt::~QInt() {
 }
 
 QInt::QInt(BASE inputType, string value) {
-
 	if (inputType == BINARY) { // Binary	
 		QInt tmp(value);
 		*this = tmp;
@@ -91,13 +90,13 @@ string QInt::SubTwoStringNumber(string num1, string num2) {
 		return "0";
 	bool isNeg = num1.length() < num2.length();
 	if (num1.length() == num2.length()) {
-		auto it1 = num1.rbegin();// Begin of reversed string
-		auto it2 = num2.rbegin();
-		while (it1 != num1.rend() && it2 != num2.rend() && *it1 == *it2) {
-			++it1;
-			++it2;
-		}
-		isNeg = *it1 < *it2;
+		size_t i = 0;
+		size_t len = num1.length();
+		for (i; i < len && num1[i] == num2[i]; ++i);
+		isNeg = num1[i] < num2[i];
+		size_t count = len - i;
+		num1 = num1.substr(i, count);
+		num2 = num2.substr(i, count);
 	}
 	if (isNeg) {
 		string tmp = num1;
@@ -128,16 +127,14 @@ string QInt::SubTwoStringNumber(string num1, string num2) {
 		char charDig = QInt::IntToChar(subDig);
 		res.push_back(charDig);
 	}
-	if (isNeg)
+	
+	if (isNeg)// Set negative for result
 		res.push_back('-');
-	auto itStart = res.begin();
-	if (*itStart == '-')
-		++itStart;
-	auto itEnd = itStart;
-	while (itEnd != res.end() && *itEnd == '0')
-		++itEnd;
-	res.erase(res.begin(), itEnd);
+	
 	reverse(res.begin(), res.end());
+
+	res = QInt::DeleteAllZeroAtHead(res);
+
 	return res;
 }
 
@@ -217,10 +214,16 @@ string QInt::MulTwoStringNumber(string num1, string num2) {
 }
 
 string QInt::TwoPowerToSrting(uint8_t n) {
-	string res("1");
-	for (int i = 0; i < n; ++i)
-		res = QInt::MulStringWithNumber(res, 2);
-	return res;
+	if (n == 0)
+		return "1";
+	if (n == 1)
+		return "2";
+	string pow = QInt::TwoPowerToSrting(n / 2);
+	string mul = QInt::MulTwoStringNumber(pow, pow);
+	if (n % 2 == 0)
+		return mul;
+	else
+		return QInt::MulStringWithNumber(mul, 2);
 }
 
 string QInt::DeleteAllZeroAtHead(string str) {
