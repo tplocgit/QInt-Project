@@ -21,7 +21,13 @@ int main()
 		exit(0);
 	}
 
+	for (auto it = resList.begin(); it != resList.end(); ++it)
+		delete* it;
+
+	resList.clear();
+
 	cout << "finished";
+
 	system("pause>nul");
 	return 0;
 }

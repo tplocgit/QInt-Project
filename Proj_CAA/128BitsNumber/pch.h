@@ -16,6 +16,6 @@
 #include<typeinfo>
 #include<algorithm>
 #include<vector>
-
+#include<math.h>
 using namespace std;
 #endif //PCH_H
