@@ -135,7 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="output.txt" />
-    <Text Include="sampleInput.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="128BitsNumber.cpp" />

@@ -628,14 +628,19 @@ QInt QInt::operator*(const QInt& num) {// Hard
 }
 
 QInt QInt::operator/(const QInt& num) {// Extra Supper Hard
-	QInt object;//000....0000 by default
-	QInt ans(*this);
-	int k = 128;
-	if (this->bitAt(0) == 1) {//this < 0		
-		//turn into 1111....1111
-		object.Bits[0] = 1;
-		object.Bits[1] = 1;
+	QInt ans(*this), tmpNum(num);
+	if (num.bitAt(0)) {
+		ans = ans.Negative();
+		tmpNum = num.Negative();
 	}
+	QInt object;//000....0000 by default
+	//QInt ans(*this);
+	if (ans.bitAt(0) == 1) {
+		object.Bits[0] = int64_t(-1);
+		object.Bits[1] = int64_t(-1);
+	}
+	int k = 128;
+	
 	bool save;
 	for (; k > 0; --k) {
 		save = ans.bitAt(0);//save most significant bit
@@ -643,15 +648,16 @@ QInt QInt::operator/(const QInt& num) {// Extra Supper Hard
 		object.moveLeft();
 		object.setBit(127, save);//put it here
 
-		object = object - num;
+		object = object - tmpNum;
 		if (object.bitAt(0) == 1) {//ans < 0
-			object = object + num;//restore
+			object = object + tmpNum;//restore
 			ans.setBit(127, 0);
 		}
 		else 
 			ans.setBit(127, 1);
 	}
 	//ans: thương - object: số dư 
+	
 	return ans;
 }
 //-----------------------------------------------------------------

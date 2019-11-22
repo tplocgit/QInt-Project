@@ -7,8 +7,8 @@
 #include"TodoList.h"
 
 int main()
-{
-	vector<Task*> list = readFile("sampleInput.txt");
+{/*
+	vector<Task*> list = readFile("data\\input.txt");
 
 	TodoList doList(list);
 
@@ -16,19 +16,23 @@ int main()
 	
 	
 	try {
-		outputFile(resList, "output.txt");
+		outputFile(resList, "output_sv\\128BitsNumber_output.txt");
 	}
 	catch (string s) {
 		cout << s << endl;
 		system("pause>nul");
 		exit(0);
 	}
-	
-	for (auto it = list.begin(); it != list.end(); ++it)
-		delete* it;
-	list.clear();
+	*/
+	//10 788323282258381939236275890776 / -27388934683056007097503944712
+	BASE bs = DECIMAL;
+	string s1, s2;
+	cin >> s1 >> s2;
 
-	cout << "finished";
+	QInt p1(bs, s1), p2(bs, s2),
+		ans = p1 / p2;
+	cout << ans.Dec();
+	//cout << "finished";
 	system("pause>nul");
 	return 0;
 }

@@ -44,9 +44,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="sampleInput.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="output.txt">
       <Filter>Resource Files</Filter>
     </Text>
