@@ -9,7 +9,7 @@ private:
 public:
 	Task* Alloc();
 	void ShowAllInfor();
-	QInt* Exe();
+	string Exe();
 	Calculator();
 	Calculator(string num1, string num2);
 	void setOperator(string input);

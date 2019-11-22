@@ -12,8 +12,18 @@ void TodoList::checkList() {
 	}
 }
 
-vector<QInt*> TodoList::doTask() {
-	vector<QInt*> res;
+/*
+vector<QInt*> TodoList::doTask()  {
+vector<QInt*> res;
+int count = 1;
+for (auto it = this->m_list.begin(); it != this->m_list.end(); ++it) {
+	res.push_back((*it)->Exe());
+}
+return res;
+}
+*/
+vector<string> TodoList::doTask() {
+	vector<string> res;
 	int count = 1;
 	for (auto it = this->m_list.begin(); it != this->m_list.end(); ++it) {
 		res.push_back((*it)->Exe());
