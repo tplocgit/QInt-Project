@@ -8,24 +8,24 @@
 
 int main()
 {
+<<<<<<< HEAD
 	/*vector<Task*> list = readFile("sampleInput.txt");
 
+=======
+	
+	vector<Task*> list = readFile("sampleInput.txt");
+>>>>>>> master
 	TodoList doList(list);
-	//cout << "Plz Check data input";
-	//doList.checkList();
-
-	vector<QInt*> resList = doList.doTask();
-
-	//cout << "List of result: \n";
-	uint16_t count = 0;
-	for (auto it = resList.begin(); it != resList.end(); ++it) {
-		cout << "\n\nTask " << ++count << endl;
-		(list[count - 1])->ShowAllInfor();
-		cout << "=>>Result: \n";
-		cout << "Binary: " << QInt::DeleteAllZeroAtHead((*it)->Bin()) << endl;
-		cout << "Hexadecimal: " << QInt::DeleteAllZeroAtHead((*it)->Hex()) << endl;
-		cout << "Decimal: " << QInt::DeleteAllZeroAtHead((*it)->Dec()) << endl;
+	vector<string> resList = doList.doTask();
+	try {
+		outputFile(resList, "output.txt");
 	}
+	catch (string s) {
+		cout << s << endl;
+		system("pause>nul");
+		exit(0);
+	}
+<<<<<<< HEAD
 	for (auto it = resList.begin(); it != resList.end(); ++it)
 		delete* it;
 
@@ -42,6 +42,10 @@ int main()
 	cout << QInt::DeleteAllZeroAtHead(a.Bin()) << endl;
 	cout << QInt::DeleteAllZeroAtHead(a.Dec())<<endl;
 	//cout << QInt::SubTwoStringNumber(b1, b2) << endl;
+=======
+
+	cout << "finished";
+>>>>>>> master
 	system("pause>nul");
 	return 0;
 }

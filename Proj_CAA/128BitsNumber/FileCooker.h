@@ -6,5 +6,7 @@
 vector <Task*> readFile(string fileName);
 
 Task*readLine(string lineInfo);
+//----------------------
 
+void outputFile(vector <string> output, string outputName);
 
