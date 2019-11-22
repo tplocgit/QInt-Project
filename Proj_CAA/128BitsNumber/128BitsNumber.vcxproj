@@ -134,6 +134,7 @@
     <ClInclude Include="Type.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="output.txt" />
     <Text Include="sampleInput.txt" />
   </ItemGroup>
   <ItemGroup>

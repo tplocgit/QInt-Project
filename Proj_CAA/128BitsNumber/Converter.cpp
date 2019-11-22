@@ -25,28 +25,38 @@ void Converter::setOperator(string input) {
 		throw "Invalid input";
 }
 
-QInt* Converter::Exe() {
-	QInt* res;
-	QInt* num1 = new QInt(this->Base(), this->Num1());
-
+string Converter::Exe() {
+	QInt num1(this->Base(), this->Num1());
+	string ans;
 
 	if (this->convertOperator == CON_DEC)
-		res = new QInt(*num1);
+		ans = num1.Dec();
 	else if (this->convertOperator == CON_HEX)
-		res = new QInt(*num1);
+		ans = num1.Hex();
 	else if (this->convertOperator == CON_BIN)
-		res = new QInt(*num1);
-	else if (this->convertOperator == ROL)
-		res = new QInt(num1->ROL());
-	else if (this->convertOperator == ROR)
-		res = new QInt(num1->ROR());
-	else if (this->convertOperator == NOT)
-		res = new QInt(~(*num1));
-	else
-		throw "Error: Deo hieu luon a. T nhin ma t tuc a";
-	delete num1;
-	return res;
-	//cout << res->Bin() << endl << res->Hex() << endl << res->Dec() << endl;
+		ans = num1.Bin();
+	//--------------
+	else {
+		if (this->convertOperator == ROL) 
+			num1 = num1.ROL();
+		else if (this->convertOperator == ROR) 
+			num1 = num1.ROR();
+		else if (this->convertOperator == NOT)
+			num1 = ~num1;
+		else
+			throw "Error: Deo hieu luon a. T nhin ma t tuc a";
+
+		//-------------
+		if (this->Base() == BINARY)
+			ans = num1.Bin();
+		else if (this->Base() == HEXADECIMAL)
+			ans = num1.Hex();
+		else if (this->Base() == DECIMAL)
+			ans = num1.Dec();
+		else
+			throw "Error: wrong base input";
+	}
+	return  QInt::DeleteAllZeroAtHead(ans);
 }
 
 void Converter::ShowAllInfor() {

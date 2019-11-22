@@ -8,37 +8,20 @@
 
 int main()
 {
-	/*
-	vector<Task*> list = readFile("sampleInput.txt");
-
-	TodoList doList(list);
-	//cout << "Plz Check data input";
-	//doList.checkList();
 	
-	vector<QInt*> resList = doList.doTask();
-
-	//cout << "List of result: \n";
-	uint16_t count = 0;
-	for (auto it = resList.begin(); it != resList.end(); ++it) {
-		cout << "\n\nTask " << ++count << endl;
-		(list[count - 1])->ShowAllInfor();
-		cout << "=>>Result: \n";
-		cout << "Binary: " << QInt::DeleteAllZeroAtHead((*it)->Bin()) << endl;
-		cout << "Hexadecimal: " << QInt::DeleteAllZeroAtHead((*it)->Hex()) << endl;
-		cout << "Decimal: " << QInt::DeleteAllZeroAtHead((*it)->Dec()) << endl;
+	vector<Task*> list = readFile("sampleInput.txt");
+	TodoList doList(list);
+	vector<string> resList = doList.doTask();
+	try {
+		outputFile(resList, "output.txt");
 	}
-	for (auto it = resList.begin(); it != resList.end(); ++it)
-		delete* it;
+	catch (string s) {
+		cout << s << endl;
+		system("pause>nul");
+		exit(0);
+	}
 
-	resList.clear();
-	*/
-	string s1, s2;
-	cin >> s1 >> s2;
-	QInt p1(s1), p2(s2),
-		ans = p1 / p2;
-
-	cout << ans.Bin();
-
+	cout << "finished";
 	system("pause>nul");
 	return 0;
 }

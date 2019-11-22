@@ -30,7 +30,7 @@ void Calculator::setOperator(string input) {
 		throw "Invalid input";
 }
 
-QInt* Calculator::Exe() {
+string Calculator::Exe() {
 	QInt* res = new QInt;
 	QInt num1(this->Base(), this->Num1());
 
@@ -73,7 +73,20 @@ QInt* Calculator::Exe() {
 		throw "Error: Operator is not defined!";
 	//cout << res->Bin() << endl;
 	//delete num1;
-	return res;
+	//return res;
+	string ans;
+	if (this->Base() == BINARY)
+		ans = res->Bin();
+	else if (this->Base() == HEXADECIMAL)
+		ans = res->Hex();
+	else if (this->Base() == DECIMAL)
+		ans = res->Dec();
+	else
+		throw "Error: wrong base input";
+
+	delete res;
+	
+	return QInt::DeleteAllZeroAtHead(ans);
 }
 
 void Calculator::ShowAllInfor() {
