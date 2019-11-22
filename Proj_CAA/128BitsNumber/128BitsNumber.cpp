@@ -31,12 +31,17 @@ int main()
 
 	resList.clear();
 	*/
-	string bits;
-	cin >> bits;
-	QInt a(bits);
-	for (int i = 0; i <= 120; ++i)
-		a.setBit(i, 1);
-	cout << QInt::DeleteAllZeroAtHead(a.Dec()) << endl;
+
+	/*int n1, n2;
+	cin >> n1 >> n2;
+	*///cout << QInt::DeleteAllZeroAtHead(QInt::SubTwoStringNumber(QInt::TwoPowerToSrting(n1), QInt::TwoPowerToSrting(n2))) << endl;
+	string b1, b2;
+	cin >> b1;//>> b2;
+
+	QInt a(DECIMAL,b1);
+	cout << QInt::DeleteAllZeroAtHead(a.Bin()) << endl;
+	cout << QInt::DeleteAllZeroAtHead(a.Dec())<<endl;
+	//cout << QInt::SubTwoStringNumber(b1, b2) << endl;
 	system("pause>nul");
 	return 0;
 }
