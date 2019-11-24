@@ -7,9 +7,9 @@
 #include"TodoList.h"
 
 int main()
-{/*
+{
 	vector<Task*> list = readFile("data\\input.txt");
-
+	cout << "Processing file...\n";
 	TodoList doList(list);
 
 	vector<string> resList = doList.doTask();
@@ -23,16 +23,9 @@ int main()
 		system("pause>nul");
 		exit(0);
 	}
-	*/
-	//10 788323282258381939236275890776 / -27388934683056007097503944712
-	BASE bs = DECIMAL;
-	string s1, s2;
-	cin >> s1 >> s2;
+	
 
-	QInt p1(bs, s1), p2(bs, s2),
-		ans = p1 / p2;
-	cout << ans.Dec();
-	//cout << "finished";
+	cout << "===> All tasks completed!!!";
 	system("pause>nul");
 	return 0;
 }

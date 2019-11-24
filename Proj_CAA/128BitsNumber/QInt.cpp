@@ -628,22 +628,25 @@ QInt QInt::operator*(const QInt& num) {// Hard
 }
 
 QInt QInt::operator/(const QInt& num) {// Extra Supper Hard
+	bool check = 0;
 	QInt ans(*this), tmpNum(num);
 	if (num.bitAt(0)) {
-		ans = ans.Negative();
 		tmpNum = num.Negative();
+		check = !check;
 	}
+
+	if (ans.bitAt(0)) {
+		ans = (*this).Negative();
+		check = !check;
+	}
+
+
+	//---------------------------------------Safe zone-------------------------
 	QInt object;//000....0000 by default
-	//QInt ans(*this);
-	if (ans.bitAt(0) == 1) {
-		object.Bits[0] = int64_t(-1);
-		object.Bits[1] = int64_t(-1);
-	}
+	//--------------------------------
 	int k = 128;
-	
-	bool save;
 	for (; k > 0; --k) {
-		save = ans.bitAt(0);//save most significant bit
+		bool save = ans.bitAt(0);//save most significant bit
 		ans.moveLeft();
 		object.moveLeft();
 		object.setBit(127, save);//put it here
@@ -653,12 +656,15 @@ QInt QInt::operator/(const QInt& num) {// Extra Supper Hard
 			object = object + tmpNum;//restore
 			ans.setBit(127, 0);
 		}
-		else 
+		else
 			ans.setBit(127, 1);
 	}
-	//ans: thương - object: số dư 
+	//ans: thương - object: số dư
+
+	if (check)
+		return ans.Negative();
+	else return ans;
 	
-	return ans;
 }
 //-----------------------------------------------------------------
 
