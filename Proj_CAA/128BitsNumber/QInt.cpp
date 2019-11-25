@@ -762,3 +762,17 @@ void QInt::moveRight() {
 		this->setBit(i, (*this)[i - 1]);
 	this->setBit(0, save);
 }
+
+//-----------------------------------------------------
+string DecToHex(string dec) {
+	if (dec == "")
+		throw "Error: Invalid input";
+	QInt p(DECIMAL, dec);
+	return p.Hex();
+}
+string HexToDec(string hex) {
+	if (hex == "")
+		throw "Error: Invalid input";
+	QInt p(HEXADECIMAL, hex);
+	return p.Dec();
+}

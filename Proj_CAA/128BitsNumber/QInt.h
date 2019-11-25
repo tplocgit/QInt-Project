@@ -58,6 +58,10 @@ public:// Some support method
 public:// Read file
 	static string DecToBin(string dec);// Hard
 	static string HexToBin(string hex);// Ez
+	//-----------------
+	static string DecToHex(string dec);
+	static string HexToDec(string hex);
+	//-----------------
 public:
 	QInt(BASE inputType, string value);// For file reading
 	QInt(string bits);
