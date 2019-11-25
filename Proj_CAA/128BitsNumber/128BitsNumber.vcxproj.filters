@@ -49,9 +49,6 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="128BitsNumber.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Calculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -71,6 +68,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TodoList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="18127078_18127130.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

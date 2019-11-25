@@ -23,6 +23,7 @@
     <ProjectGuid>{FCA0FAB5-0B7E-4650-A99A-D02F0B75BF9C}</ProjectGuid>
     <RootNamespace>My128BitsNumber</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>18127078_18127130</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -137,7 +138,7 @@
     <Text Include="output.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="128BitsNumber.cpp" />
+    <ClCompile Include="18127078_18127130.cpp" />
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="FileCooker.cpp" />

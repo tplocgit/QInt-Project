@@ -51,7 +51,8 @@ QInt::QInt(BASE inputType, string value) {
 		QInt tmp(bits);
 		*this = tmp;
 	}
-	else throw "Error: Invalid input Type!";
+	else
+		throw "Error: Invalid input Type!";
 }
 
 // Support method-------------------------------------------------------------------------------------------------------------
@@ -317,6 +318,7 @@ bool QInt::bitAt(uint8_t index) const {
 bool QInt::operator[](int index)const {// New
 	return this->bitAt(index);
 }
+
 QInt QInt::ComplementOfOne()const {
 	QInt tmp = *this;
 	if (!(*this)[0]) // Fist bit = 0
