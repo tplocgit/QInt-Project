@@ -12,10 +12,13 @@ vector <Task*> readFile(string fileName) {
 
 	vector <Task*> list;
 	string s;
+	//int p = 0;
 	while (!reader.eof()) {
 		getline(reader, s, '\n');
 		if (s == "")
 			break;
+		//cout << ++p << endl;
+
 		Task* p = nullptr;
 		try {
 			p = readLine(s);
@@ -36,6 +39,7 @@ vector <Task*> readFile(string fileName) {
 Task*readLine(string lineInfo) {
 	vector<string> tokens = Tokenizer::Parse(lineInfo, " ");
 	Task* res = nullptr;
+	
 	if (tokens.size() == 3) {
 		res = new Converter;
 		res->setBase(tokens[0]);

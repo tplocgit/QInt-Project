@@ -24,9 +24,14 @@ return res;
 */
 vector<string> TodoList::doTask() {
 	vector<string> res;
-	int count = 1;
+	//int count = 1;
 	for (auto it = this->m_list.begin(); it != this->m_list.end(); ++it) {
-		res.push_back((*it)->Exe());
+		//cout << "Task " << count++ << endl;
+		//(*it)->ShowAllInfor();
+		//cout << "Result: ";
+		string token = (*it)->Exe();
+		res.push_back(token);
+		//cout << token << endl;
 	}
 	return res;
 }

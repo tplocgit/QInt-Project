@@ -6,9 +6,21 @@
 #include "Calculator.h"
 #include"TodoList.h"
 
-int main()
+int main(/*int argc, char* argv[]*/)
 {
-	vector<Task*> list = readFile("data\\input.txt");
+	/*if (argc != 3) {
+		cout << "Error: Invalid Argument count!!!!!!!!!!";
+		return -1;
+	}*/
+	vector<Task*> list;
+	try {
+		list = readFile("data\\input.txt");
+	}
+	catch (string s) {
+		cout << s << endl;
+		system("pause>nul");
+		return -2;
+	}
 	cout << "Processing file...\n";
 	TodoList doList(list);
 
@@ -21,20 +33,12 @@ int main()
 	catch (string s) {
 		cout << s << endl;
 		system("pause>nul");
-		exit(0);
+		return -3;
 	}
 
 
-	cout << "===> All tasks completed!!!";
-
-	/*
-	string a, b;
-	cin >> a >> b;
-	QInt p1(DECIMAL, a), p2(DECIMAL, b),
-		ans = p1 * p2;
-
-	cout << ans.Dec();
-	*/
-	system("pause>nul");
+	cout << "===> All tasks completed!!!\n";
+	
+	system("pause");
 	return 0;
 }

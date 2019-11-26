@@ -805,13 +805,13 @@ void QInt::moveRight() {
 }
 
 //-----------------------------------------------------
-string DecToHex(string dec) {
+string QInt::DecToHex(string dec) {
 	if (dec == "")
 		throw "Error: Invalid input";
 	QInt p(DECIMAL, dec);
 	return p.Hex();
 }
-string HexToDec(string hex) {
+string QInt::HexToDec(string hex) {
 	if (hex == "")
 		throw "Error: Invalid input";
 	QInt p(HEXADECIMAL, hex);
