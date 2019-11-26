@@ -26,13 +26,14 @@ int main()
 
 
 	cout << "===> All tasks completed!!!";
+
 	/*
 	string a, b;
 	cin >> a >> b;
 	QInt p1(DECIMAL, a), p2(DECIMAL, b),
-		ans = p1 / p2;
+		ans = p1 * p2;
 
-	cout << ans.Bin();
+	cout << ans.Dec();
 	*/
 	system("pause>nul");
 	return 0;

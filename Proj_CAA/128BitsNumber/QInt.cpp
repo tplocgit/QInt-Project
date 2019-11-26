@@ -618,14 +618,31 @@ QInt QInt::operator-(const QInt& num) {// Normal
 }
 
 QInt QInt::operator*(const QInt& num) {// Hard
+	bool check = 0;
+	QInt Q, tmpNum;
+	if (num.bitAt(0)) {
+		tmpNum = num.Negative();
+		check = !check;
+	}
+	else tmpNum = num;
+
+	if (this->bitAt(0)) {
+		Q = (*this).Negative();
+		check = !check;
+	}
+	else Q = *this;
+
 	QInt ans;
-	for (int i = 127; i > 0; --i) {
-		int shift = 127 - i;
-		if (num.bitAt(i) == 1) {
-			QInt tmp = (*this << shift);
+	for (int i = 127; i >= 0; --i) {
+		//int shift = 127 - i;
+		if (tmpNum.bitAt(i) == 1) {
+			QInt tmp = (Q << (127 - i));
 			ans = (ans + tmp);
 		}
 	}
+
+	if (check)
+		return ans.Negative();
 	return ans;
 }
 
@@ -729,38 +746,62 @@ QInt QInt::operator^(const QInt& num)const {
 //-----------------------------------------------------------------
 QInt QInt::operator<<(int bits)const {// Normal
 	QInt ans = *this;
-	while (bits > 0) {
-		ans.moveLeft();
-		--bits;
+	if (bits > 0) {
+		while (bits > 0) {
+			ans.moveLeft();
+			--bits;
+		}
+	}
+	else if (bits < 0) {
+		while (bits < 0) {
+			ans.moveRight();
+			++bits;
+		}
 	}
 	return ans;
 }
 QInt QInt::operator>>(int bits)const {// Ez
 	QInt ans = *this;
-	while (bits > 0) {
-		ans.moveRight();
-		--bits;
+	if (bits > 0) {
+		while (bits > 0) {
+			ans.moveRight();
+			--bits;
+		}
+	}
+	else if (bits < 0) {
+		while (bits < 0) {
+			ans.moveLeft();
+			++bits;
+		}
 	}
 	return ans;
 }
 
 void QInt::moveLeft() {
-	for (int i = 0; i < 127; ++i)
+	/*for (int i = 0; i < 127; ++i)
 		this->setBit(i, (*this)[i + 1]);
-	this->setBit(127, 0);
+	this->setBit(127, 0);*/
+	string num = this->Bin();
+	num.erase(num.begin());
+	num.push_back('0');
+	QInt ans(BINARY, num);
+	*this = ans;
 }
 void QInt::moveRight() {
 	//dịch số học 
-	/*bool save = this->bitAt(0);
-	for (int i = 0; i < 127; ++i) {
-		this->setBit(i + 1, this->bitAt(i));
-	}
-	this->setBit(0, save);
-	*/
+
 	bool save = this->bitAt(0);
 	for (int i = 127; i > 0; --i)
 		this->setBit(i, (*this)[i - 1]);
 	this->setBit(0, save);
+	
+	/*string num = this->Bin();
+	char save = num.at(0);
+	num.insert(num.begin(), save);
+	num.pop_back();
+	QInt ans(BINARY, num);
+	*this = ans;
+	*/
 }
 
 //-----------------------------------------------------
